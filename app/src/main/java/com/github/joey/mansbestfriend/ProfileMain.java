@@ -15,5 +15,5 @@ public class ProfileMain extends AppCompatActivity {
     }
 
     Button activityBtn = (Button) findViewById(R.id.activitiesButton);
-    
+
 }

@@ -43,6 +43,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        prof1Button.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent prof = new Intent(v.getContext(), ProfileMain.class);
+                startActivityForResult(prof, 0);
+            }
+        });
+
+
         Button dbButton = (Button) findViewById(R.id.dbButton);
 
         dbButton.setOnClickListener(new View.OnClickListener() {
@@ -54,14 +64,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        prof1Button.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v){
-                Intent selProfile = new Intent(v.getContext(), ProfileMain.class);
-                startActivityForResult(selProfile,0);
-            }
-        });
 
 
 

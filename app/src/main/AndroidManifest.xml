@@ -30,11 +30,14 @@
             android:name=".NewReminder"
             android:label="@string/title_activity_new_reminder"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ProfileMain"></activity>
-            android:theme="@style/AppTheme.NoActionBar" />
+        android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Database"
             android:label="@string/title_activity_database"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ProfileMain"
+            android:label="@string/title_activity_profile_main"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

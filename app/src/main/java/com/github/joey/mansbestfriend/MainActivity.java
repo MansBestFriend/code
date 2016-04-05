@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 //Test
 public class MainActivity extends AppCompatActivity {
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         });
 */
         Button newProfileButton = (Button) findViewById(R.id.newProfileButton);
+        ImageButton prof1Button = (ImageButton) findViewById(R.id.imageButton);
 
         newProfileButton.setOnClickListener(new View.OnClickListener() {
 
@@ -51,6 +53,18 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(db,0);
             }
         });
+
+        prof1Button.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v){
+                Intent selProfile = new Intent(v.getContext(), ProfileMain.class);
+                startActivityForResult(selProfile,0);
+            }
+        });
+
+
+
     }
 
     @Override

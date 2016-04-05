@@ -39,6 +39,10 @@
             android:name=".ProfileMain"
             android:label="@string/title_activity_profile_main"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Activity"
+            android:label="@string/title_activity_activity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

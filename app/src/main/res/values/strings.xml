@@ -6,6 +6,7 @@
     <string name="title_activity_database">Database</string>
     <string name="title_activity_new_reminder">NewReminder</string>
     <string name="title_activity_profile_main">ProfileMain</string>
+    <string name="title_activity_activity">Activity</string>
 </resources>
 
 

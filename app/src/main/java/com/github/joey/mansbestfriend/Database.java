@@ -1,0 +1,45 @@
+package com.github.joey.mansbestfriend;
+
+import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
+public class Database extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_database);
+        /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });*/
+
+        Spinner dbDropdown = (Spinner)findViewById(R.id.dbDropdown);
+        String[] breedList = new String[]{"Akita", "Australian Shepherd", "Basset Hound", "Beagle", "Bernese Mountain Dog",
+                "Bichon Frises", "Bloodhound", "Border Collie", "Boston Terrier", "Boxer", "Brittany", "Bulldog (English)",
+                "Bulldog (French)", "Bullmastiff", "Cane Corso", "Cavalier King Charles Spaniel", "Chihuahua", "Collie",
+                "Corgi (Pembroke Welsh)", "Dachsund", "Doberman Pinscher", "German Shepherd", "Great Dane", "Havanese",
+                "Maltese", "Mastiff", "Miniature Schnauzer", "Newfoundland", "Papillon", "Pointer (German Shorthaired)",
+                "Pomeranian", "Poodle", "Pug", "Retriever (Chesepeake Bay)", "Retriever (Golden)", "Retriever (Labrador)",
+                "Rhodesian Ridgeback", "Rottweiler", "Shetland Sheepdog", "Shiba Inu", "Shih Tzu", "Siberian Husky",
+                "Soft Coated Wheaten Terrier", "Spaniel (Cocker)", "Spaniel (English Springer)", "St. Bernard", "Vizsla",
+                "Weimaraners", "West Highland White Terrier", "Yorkshire Terrier"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, breedList);
+        dbDropdown.setAdapter(adapter);
+
+    }
+
+}

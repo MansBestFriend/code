@@ -35,9 +35,20 @@ public class MainActivity extends AppCompatActivity {
         newProfileButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 Intent newProfile = new Intent(v.getContext(), Profile.class);
-                startActivityForResult(newProfile,0);
+                startActivityForResult(newProfile, 0);
+            }
+        });
+
+        Button dbButton = (Button) findViewById(R.id.dbButton);
+
+        dbButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v){
+                Intent db = new Intent(v.getContext(), Database.class);
+                startActivityForResult(db,0);
             }
         });
     }

@@ -12,7 +12,8 @@
     tools:context="com.github.joey.mansbestfriend.MainActivity"
     tools:showIn="@layout/activity_main"
     android:backgroundTint="#d2e6fc"
-    android:background="#e2f2fd">
+    android:background="#e2f2fd"
+    android:scrollIndicators="right">
 
     <Button
         style="?android:attr/buttonStyleSmall"

@@ -21,6 +21,10 @@
         <activity
             android:name=".Profile"
             android:label="@string/title_activity_profile"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Database"
+            android:label="@string/title_activity_database"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

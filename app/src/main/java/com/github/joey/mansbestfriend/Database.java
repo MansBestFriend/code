@@ -1,5 +1,6 @@
 package com.github.joey.mansbestfriend;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -7,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 public class Database extends AppCompatActivity {
@@ -26,6 +28,17 @@ public class Database extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });*/
+
+        Button backButton = (Button) findViewById(R.id.backButton);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent profiles = new Intent(v.getContext(), MainActivity.class);
+                startActivityForResult(profiles, 0);
+            }
+        });
 
         Spinner dbDropdown = (Spinner)findViewById(R.id.dbDropdown);
         String[] breedList = new String[]{"Akita", "Australian Shepherd", "Basset Hound", "Beagle", "Bernese Mountain Dog",

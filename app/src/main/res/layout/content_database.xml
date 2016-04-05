@@ -20,7 +20,7 @@
         android:background="#b2b2b2"
         android:clickable="true"
         android:dropDownSelector="#ce1010"
-        android:layout_below="@+id/button"
+        android:layout_below="@+id/backButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -38,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Back"
-        android:id="@+id/button"
+        android:id="@+id/backButton"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />

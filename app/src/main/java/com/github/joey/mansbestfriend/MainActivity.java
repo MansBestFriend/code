@@ -12,6 +12,8 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import java.io.IOException;
+
 //Test
 public class MainActivity extends AppCompatActivity {
 
@@ -63,6 +65,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(db,0);
             }
         });
+
+        HandleDB dbChk = new HandleDB(getApplicationContext());
+        if(!dbChk.checkDatabase(getApplicationContext())){
+            try{
+                dbChk.createDataBase();
+            } catch(IOException e){
+                e.printStackTrace();
+            }
+        }
 
 
 

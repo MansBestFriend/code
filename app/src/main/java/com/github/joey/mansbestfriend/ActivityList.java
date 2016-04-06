@@ -1,5 +1,6 @@
 package com.github.joey.mansbestfriend;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -7,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.Date;
@@ -40,6 +42,18 @@ public class ActivityList extends AppCompatActivity {
         ArrayAdapter<String> activityListAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, activityList);
 
         activityListView.setAdapter(activityListAdapter);
+
+
+        Button newActiv = (Button) findViewById(R.id.newActivityBtn);
+
+        newActiv.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent newActivity = new Intent(v.getContext(), NewActivity.class);
+                startActivityForResult(newActivity, 0);
+            }
+        });
     }
 
 

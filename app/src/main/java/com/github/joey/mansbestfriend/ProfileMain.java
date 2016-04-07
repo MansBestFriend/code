@@ -24,7 +24,12 @@ public class ProfileMain extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent activMenu = new Intent(v.getContext(), ActivityList.class);
-                startActivityForResult(activMenu, 0);
+
+                Bundle b = new Bundle();
+                b.putInt("1",profNum);
+                activMenu.putExtras(b);
+                startActivity(activMenu);
+                finish();
             }
         });
 

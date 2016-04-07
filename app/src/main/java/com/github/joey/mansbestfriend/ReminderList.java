@@ -41,10 +41,14 @@ public class ReminderList extends AppCompatActivity {
 
         String title = "";
 
+        ListView remindList = (ListView) findViewById(R.id.remindersList);
+        ArrayList<String> listItems = new ArrayList<String>();
+
         if(c != null){
             if(c.moveToFirst()){
                 do{
                     title = c.getString(c.getColumnIndex("Title"));
+                    listItems.add(title);
 
                 } while(c.moveToNext());
             }
@@ -53,11 +57,9 @@ public class ReminderList extends AppCompatActivity {
             Log.e("db", "c is null");
         }
 
-        ListView remindList = (ListView) findViewById(R.id.remindersList);
-        ArrayList<String> listItems = new ArrayList<String>();
+
 
         if(!title.isEmpty()){
-            listItems.add(title);
             ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                 this,android.R.layout.simple_list_item_1,listItems
             );

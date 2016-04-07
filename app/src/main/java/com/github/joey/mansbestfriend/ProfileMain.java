@@ -8,12 +8,16 @@ import android.widget.Button;
 
 public class ProfileMain extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_main);
 
         Button viewActivities = (Button) findViewById(R.id.activityBtn);
+
+        Bundle b = getIntent().getExtras();
+        final int profNum = b.getInt("1");
 
         viewActivities.setOnClickListener(new View.OnClickListener() {
 
@@ -31,9 +35,17 @@ public class ProfileMain extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent remindMenu = new Intent(v.getContext(), ReminderList.class);
-                startActivityForResult(remindMenu, 0);
+
+                Bundle b = new Bundle();
+                b.putInt("1",profNum);
+                remindMenu.putExtras(b);
+                startActivity(remindMenu);
+                finish();
             }
         });
+
+
+
     }
 
 }

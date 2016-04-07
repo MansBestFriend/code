@@ -24,7 +24,7 @@
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="450dp"
-        android:id="@+id/listView"
+        android:id="@+id/remindersList"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView3" />

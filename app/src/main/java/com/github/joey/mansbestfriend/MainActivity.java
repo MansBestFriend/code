@@ -50,7 +50,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent prof = new Intent(v.getContext(), ProfileMain.class);
-                startActivityForResult(prof, 0);
+                Bundle b = new Bundle();
+                b.putInt("1",1);
+                prof.putExtras(b);
+                startActivity(prof);
+                finish();
+
             }
         });
 

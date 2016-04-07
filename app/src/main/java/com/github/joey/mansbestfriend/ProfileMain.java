@@ -28,8 +28,8 @@ public class ProfileMain extends AppCompatActivity {
                 Bundle b = new Bundle();
                 b.putInt("1",profNum);
                 activMenu.putExtras(b);
-                startActivity(activMenu);
-                finish();
+                startActivityForResult(activMenu,0);
+                finishActivity(1);
             }
         });
 
@@ -44,8 +44,8 @@ public class ProfileMain extends AppCompatActivity {
                 Bundle b = new Bundle();
                 b.putInt("1",profNum);
                 remindMenu.putExtras(b);
-                startActivity(remindMenu);
-                finish();
+                startActivityForResult(remindMenu,0);
+                finishActivity(1);
             }
         });
 

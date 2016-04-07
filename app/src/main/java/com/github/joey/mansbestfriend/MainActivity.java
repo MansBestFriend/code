@@ -53,8 +53,9 @@ public class MainActivity extends AppCompatActivity {
                 Bundle b = new Bundle();
                 b.putInt("1",1);
                 prof.putExtras(b);
-                startActivity(prof);
-                finish();
+                startActivityForResult(prof,0);
+                finishActivity(1);
+
 
             }
         });

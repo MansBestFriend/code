@@ -11,37 +11,39 @@
     android:backgroundTint="#d2e6fc"
     android:background="#e2f2fd"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.github.joey.mansbestfriend.Database"
-    tools:showIn="@layout/activity_database">
+    tools:context="com.github.joey.mansbestfriend.BarksList"
+    tools:showIn="@layout/activity_barks_list">
 
-    <Spinner
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/dbDropdown"
-        android:spinnerMode="dropdown"
-        android:background="#b2b2b2"
-        android:clickable="true"
-        android:dropDownSelector="#ce1010"
-        android:layout_below="@+id/backButton"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Your Location:"
+        android:id="@+id/yourLocation"
+        android:layout_marginLeft="25dp"
+        android:layout_marginStart="25dp"
+        android:layout_alignBottom="@+id/locationText"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Dog Database"
-        android:id="@+id/textView3"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Tuscaloosa, AL"
+        android:id="@+id/locationText"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="150dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="480dp" />
 
     <Button
-        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Back"
-        android:id="@+id/backButton"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:text="New Bark"
+        android:id="@+id/newBarkButton"
+        android:layout_marginTop="70dp"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

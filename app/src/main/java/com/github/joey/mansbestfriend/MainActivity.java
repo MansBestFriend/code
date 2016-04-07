@@ -59,6 +59,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button barksButton = (Button) findViewById(R.id.barksButton);
+
+        barksButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent barksList = new Intent(v.getContext(), BarksList.class);
+                startActivityForResult(barksList,0);
+            }
+        });
+
 
         Button dbButton = (Button) findViewById(R.id.dbButton);
 

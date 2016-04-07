@@ -40,7 +40,7 @@ public class Database extends AppCompatActivity {
             }
         });
 
-        Spinner dbDropdown = (Spinner)findViewById(R.id.dbDropdown);
+        Spinner dbDropdown = (Spinner) findViewById(R.id.dbDropdown);
         String[] breedList = new String[]{"Akita", "Australian Shepherd", "Basset Hound", "Beagle", "Bernese Mountain Dog",
                 "Bichon Frises", "Bloodhound", "Border Collie", "Boston Terrier", "Boxer", "Brittany", "Bulldog (English)",
                 "Bulldog (French)", "Bullmastiff", "Cane Corso", "Cavalier King Charles Spaniel", "Chihuahua", "Collie",

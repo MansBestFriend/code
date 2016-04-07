@@ -8,6 +8,8 @@
     <string name="title_activity_profile_main">ProfileMain</string>
     <string name="title_activity_activity">Activity</string>
     <string name="title_activity_new">NewActivity</string>
+    <string name="title_activity_barks_list">BarksList</string>
+    <string name="title_activity_new_bark">NewBark</string>
 </resources>
 
 

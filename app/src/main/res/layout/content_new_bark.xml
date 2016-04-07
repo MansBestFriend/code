@@ -11,29 +11,52 @@
     android:backgroundTint="#d2e6fc"
     android:background="#e2f2fd"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.github.joey.mansbestfriend.Database"
-    tools:showIn="@layout/activity_database">
+    tools:context="com.github.joey.mansbestfriend.NewBark"
+    tools:showIn="@layout/activity_new_bark"
+    android:fadeScrollbars="false"
+    android:fadingEdgeLength="100dp"
+    android:filterTouchesWhenObscured="false">
 
     <Spinner
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:id="@+id/dbDropdown"
-        android:spinnerMode="dropdown"
-        android:background="#b2b2b2"
+        android:id="@+id/barkTypeDropdown"
         android:clickable="true"
-        android:dropDownSelector="#ce1010"
-        android:layout_below="@+id/backButton"
+        android:spinnerMode="dropdown"
+        android:layout_marginTop="70dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="320dp"
+        android:layout_height="300dp"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:maxLength="150"
+        android:id="@+id/barkText"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Dog Database"
-        android:id="@+id/textView3"
-        android:layout_alignParentTop="true"
+        android:text="New Bark"
+        android:id="@+id/textView5"
+        android:layout_marginTop="25dp"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:text="Submit Bark"
+        android:textSize="25dp"
+        android:textAllCaps="false"
+        android:id="@+id/submitBarkButton"
+        android:layout_below="@+id/barkText"
+        android:layout_centerHorizontal="true"
+        android:background="#52c5ff"
+        android:enabled="true" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -43,5 +66,8 @@
         android:id="@+id/backButton"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"
+        android:fadingEdge="horizontal" />
+
 </RelativeLayout>

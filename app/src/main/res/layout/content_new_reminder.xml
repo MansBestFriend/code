@@ -8,6 +8,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:backgroundTint="#d2e6fc"
+    android:background="#e2f2fd"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.github.joey.mansbestfriend.NewReminder"
     tools:showIn="@layout/activity_new_reminder">

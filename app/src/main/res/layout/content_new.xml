@@ -8,6 +8,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:backgroundTint="#d2e6fc"
+    android:background="#e2f2fd"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.github.joey.mansbestfriend.NewActivity"
     tools:showIn="@layout/activity_new">
@@ -15,7 +17,7 @@
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/activityTypeSel"
+        android:id="@+id/activityDropdown"
         android:layout_marginTop="24dp"
         android:spinnerMode="dropdown"
         android:layout_alignParentTop="true"
@@ -29,7 +31,7 @@
         android:text="Comment"
         android:ems="10"
         android:id="@+id/activityComment"
-        android:layout_below="@+id/activityTypeSel"
+        android:layout_below="@+id/activityDropdown"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 

@@ -52,7 +52,7 @@ public class HandleDB extends SQLiteOpenHelper {
         byte[] buffer = new byte[1024];
         int length;
         while((length = input.read(buffer)) > 0){
-            output.write(buffer,0,length);
+            output.write(buffer, 0, length);
         }
 
         output.flush();
@@ -69,9 +69,15 @@ public class HandleDB extends SQLiteOpenHelper {
     }
 
     public boolean checkDatabase(Context chk){
-        File dbFile = chk.getDatabasePath(db_name);
-        Log.e("zeus", "Check db returns :" + dbFile.exists());
-        return dbFile.exists();
+        SQLiteDatabase checkDb = null;
+        try {
+
+            checkDb = SQLiteDatabase.openDatabase(db_path + db_name, null, SQLiteDatabase.OPEN_READONLY);
+            checkDb.close();
+        } catch(Exception e){
+
+        }
+        return checkDb != null;
     }
 
     @Override

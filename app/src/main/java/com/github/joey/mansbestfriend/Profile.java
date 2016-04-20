@@ -1,6 +1,7 @@
 package com.github.joey.mansbestfriend;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -33,6 +34,9 @@ public class Profile extends AppCompatActivity {
         final HandleDB helper = new HandleDB(getApplicationContext());
         final SQLiteDatabase db = helper.getWritableDatabase();
         LinkedList<String> breedList = new LinkedList<String>();
+
+
+
         Cursor c = db.rawQuery("SELECT Name FROM Breeds;",null);
         if(c != null){
             if(c.moveToFirst()){
@@ -45,9 +49,63 @@ public class Profile extends AppCompatActivity {
         for(int i=0; i<tmpBrdAry.length; i++){
             tmpBrdAry[i] = breedList.get(i);
         }
-        Spinner breedDropdown = (Spinner)findViewById(R.id.breedSpinner);
+        final Spinner breedDropdown = (Spinner)findViewById(R.id.breedSpinner);
         ArrayAdapter<String> profAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,tmpBrdAry);
         breedDropdown.setAdapter(profAdapter);
+
+        Button enterProf = (Button)findViewById(R.id.createProfBtn);
+        enterProf.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v){
+
+                Cursor pNum = db.rawQuery("SELECT Id FROM Profiles;",null);
+
+                String numStr = "";
+                if(pNum != null){
+                    if(pNum.moveToFirst()){
+                        do{
+                            numStr = pNum.getString(pNum.getColumnIndex("Id"));
+                        } while(pNum.moveToNext());
+                    }
+                }
+                if(!numStr.isEmpty()){
+                    int id = Integer.parseInt(numStr) + 1;
+
+                    EditText title = (EditText)findViewById(R.id.dogName);
+                    String nameStr = title.getText().toString();
+                    EditText weight = (EditText)findViewById(R.id.dogWeight);
+                    String weightStr = weight.getText().toString();
+                    EditText age = (EditText)findViewById(R.id.ageText);
+                    String ageStr = age.getText().toString();
+                    RadioGroup sex = (RadioGroup)findViewById(R.id.sexRadioGroup);
+                    String sexStr = "";
+                    if(sex.getCheckedRadioButtonId() == 0){
+                        sexStr = "M";
+                    } else {
+                        sexStr = "F";
+                    }
+                    String breedStr = breedDropdown.getSelectedItem().toString();
+                    EditText comment = (EditText)findViewById(R.id.profBio);
+                    String commentStr = comment.getText().toString();
+                    ContentValues values = new ContentValues();
+                    values.put("Id",id);
+                    values.put("Name", nameStr);
+                    values.put("Age", ageStr);
+                    values.put("Sex", sexStr);
+                    values.put("Biography", commentStr);
+                    values.put("BreedName", breedStr);
+                    db.insert("Profiles", null, values);
+                    db.close();
+                    Intent resultIntent = new Intent(v.getContext(),MainActivity.class);
+                    setResult(3,resultIntent);
+                    finish();
+
+                }
+
+            }
+
+        });
 
        /* Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

@@ -13,7 +13,8 @@
     tools:showIn="@layout/activity_main"
     android:backgroundTint="#d2e6fc"
     android:background="#e2f2fd"
-    android:scrollIndicators="right">
+    android:scrollIndicators="right"
+    android:id="@+id/mainLayout">
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -47,13 +48,20 @@
         android:layout_alignParentEnd="true"
         android:textSize="12dp" />
 
-    <ImageButton
-        android:layout_width="300dp"
-        android:layout_height="250dp"
-        android:id="@+id/imageButton"
-        android:src="@drawable/dog"
-        android:layout_below="@+id/newProfileButton"
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/profileList"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="57dp" />
+        android:layout_below="@+id/newProfileButton"
+        android:divider="#00000000"
+        android:choiceMode="singleChoice" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/img"
+        android:layout_below="@+id/newProfileButton"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

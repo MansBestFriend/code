@@ -78,7 +78,7 @@
         android:layout_above="@+id/textView2"
         android:layout_toLeftOf="@+id/textView"
         android:layout_toStartOf="@+id/textView"
-        android:id="@+id/radioGroup">
+        android:id="@+id/sexRadioGroup">
 
         <RadioButton
             android:layout_width="wrap_content"
@@ -105,7 +105,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ageText"
-        android:layout_above="@+id/radioGroup"
+        android:layout_above="@+id/sexRadioGroup"
         android:layout_alignLeft="@+id/textView"
         android:layout_alignStart="@+id/textView"
         android:layout_marginLeft="49dp"
@@ -122,9 +122,17 @@
         android:id="@+id/profBio"
         android:layout_alignLeft="@+id/textView"
         android:layout_alignStart="@+id/textView"
-        android:layout_alignTop="@+id/radioGroup"
+        android:layout_alignTop="@+id/sexRadioGroup"
         android:layout_alignBottom="@+id/breedSpinner"
         android:text="Comments"
         android:background="#ffffff" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create Profile"
+        android:id="@+id/createProfBtn"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

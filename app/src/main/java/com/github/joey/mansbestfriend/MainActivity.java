@@ -1,18 +1,28 @@
 package com.github.joey.mansbestfriend;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 //Test
 public class MainActivity extends AppCompatActivity {
@@ -20,45 +30,48 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+        HandleDB dbChk = new HandleDB(getApplicationContext());
+        if(!dbChk.checkDatabase(getApplicationContext())) {
+            try {
+                dbChk.createDataBase();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        });
-*/
+        }
+
+        setContentView(R.layout.activity_main);
+        updateProfList();
         Button newProfileButton = (Button) findViewById(R.id.newProfileButton);
-        ImageButton prof1Button = (ImageButton) findViewById(R.id.imageButton);
+        //ImageButton prof1Button = (ImageButton) findViewById(R.id.imageButton);
+
+
+
 
         newProfileButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 Intent newProfile = new Intent(v.getContext(), Profile.class);
-                startActivityForResult(newProfile, 0);
-            }
-        });
-
-        prof1Button.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent prof = new Intent(v.getContext(), ProfileMain.class);
-                Bundle b = new Bundle();
-                b.putInt("1",1);
-                prof.putExtras(b);
-                startActivityForResult(prof,0);
-                finishActivity(1);
+                startActivityForResult(newProfile, 3);
 
 
             }
         });
+
+//        prof1Button.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                Intent prof = new Intent(v.getContext(), ProfileMain.class);
+//                Bundle b = new Bundle();
+//                b.putInt("1",1);
+//                prof.putExtras(b);
+//                startActivityForResult(prof,0);
+//                finishActivity(1);
+//
+//
+//            }
+//        });
 
         Button barksButton = (Button) findViewById(R.id.barksButton);
 
@@ -67,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent barksList = new Intent(v.getContext(), BarksList.class);
-                startActivityForResult(barksList,0);
+                startActivityForResult(barksList, 0);
             }
         });
 
@@ -83,14 +96,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        HandleDB dbChk = new HandleDB(getApplicationContext());
-        if(!dbChk.checkDatabase(getApplicationContext())){
-            try{
-                dbChk.createDataBase();
-            } catch(IOException e){
-                e.printStackTrace();
-            }
-        }
 
 
 
@@ -118,5 +123,50 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void updateProfList(){
+        HandleDB helper = new HandleDB(getApplicationContext());
+        SQLiteDatabase db = helper.getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT Id FROM Profiles;", null);
+
+        LinkedList<String> profList = new LinkedList<String>();
+
+        if(c != null){
+            if(c.moveToFirst()){
+                do{
+                    profList.add(c.getString(c.getColumnIndex("Id")));
+                } while(c.moveToNext());
+            }
+        }
+        String[] sampleTxt = new String[profList.size()];
+        Integer[] imageList = new Integer[profList.size()];
+        for(int i=0; i<profList.size(); i++){
+            imageList[i] = R.drawable.dog;
+            sampleTxt[i] = "";
+        }
+        CustomList adapter = new CustomList(MainActivity.this,sampleTxt,imageList);
+        ListView pList = (ListView)findViewById(R.id.profileList);
+        pList.setAdapter(adapter);
+        pList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+            @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+                Intent prof = new Intent(view.getContext(), ProfileMain.class);
+                Bundle b = new Bundle();
+                b.putInt("1",position + 1);
+                prof.putExtras(b);
+                startActivityForResult(prof,0);
+                finishActivity(1);
+            }
+        });
+        db.close();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if(requestCode == 3){
+            updateProfList();
+        }
     }
 }

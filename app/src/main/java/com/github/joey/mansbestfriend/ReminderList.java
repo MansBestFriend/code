@@ -27,15 +27,10 @@ public class ReminderList extends AppCompatActivity {
 
         HandleDB helper = new HandleDB(getApplicationContext());
 
-        try {
-            helper.createDataBase();
-        } catch(Exception e){
-            Log.e("e","Failed to create database");
-        }
 
         Log.e("db",getDatabasePath("mansbestfriend.db").toString());
 
-        SQLiteDatabase db = this.openOrCreateDatabase(getDatabasePath("mansbestfriend.db").toString(), MODE_PRIVATE, null);
+        SQLiteDatabase db = helper.getReadableDatabase();
 
         Cursor c = db.rawQuery("SELECT Title FROM Reminders WHERE ProfileId == " + profNum + ";", null);
 
@@ -80,7 +75,11 @@ public class ReminderList extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent newReminder = new Intent(v.getContext(), NewReminder.class);
+                Bundle b = new Bundle();
+                b.putInt("1",profNum);
+                newReminder.putExtras(b);
                 startActivityForResult(newReminder, 0);
+                finishActivity(1);
             }
         });
 

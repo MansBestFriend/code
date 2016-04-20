@@ -35,16 +35,58 @@
         android:layout_toStartOf="@+id/textView4"
         android:layout_marginTop="36dp" />
 
-    <Spinner
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/reminderFreq"
-        android:spinnerMode="dropdown"
-        android:layout_alignBaseline="@+id/reminderTitle"
-        android:layout_alignBottom="@+id/reminderTitle"
+        android:text="Enter Reminder"
+        android:id="@+id/enterRemindBtn"
+        android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/reminderTitle"
-        android:layout_toEndOf="@+id/reminderTitle"
-        android:layout_marginLeft="65dp"
-        android:layout_marginStart="65dp" />
+        android:layout_toEndOf="@+id/reminderTitle" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/minutesText"
+        android:layout_marginTop="73dp"
+        android:layout_below="@+id/reminderTitle"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/reminderTitle"
+        android:layout_alignEnd="@+id/reminderTitle"
+        android:text="Minutes" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Frequency:"
+        android:id="@+id/textViewFreq"
+        android:layout_below="@+id/reminderTitle"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="27dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/hoursText"
+        android:layout_below="@+id/minutesText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/minutesText"
+        android:layout_alignEnd="@+id/minutesText"
+        android:text="Hours" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/daysText"
+        android:layout_below="@+id/hoursText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/hoursText"
+        android:layout_alignEnd="@+id/hoursText"
+        android:text="Days" />
 
 </RelativeLayout>

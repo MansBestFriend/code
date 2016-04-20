@@ -35,15 +35,12 @@ public class ActivityList extends AppCompatActivity {
 
         HandleDB helper = new HandleDB(getApplicationContext());
 
-        try {
-            helper.createDataBase();
-        } catch(Exception e){
-            Log.e("e", "Failed to create database");
-        }
 
         Log.e("db", getDatabasePath("mansbestfriend.db").toString());
 
-        SQLiteDatabase db = this.openOrCreateDatabase(getDatabasePath("mansbestfriend.db").toString(), MODE_PRIVATE, null);
+        SQLiteDatabase db = helper.getReadableDatabase();
+
+        //SQLiteDatabase db = this.openOrCreateDatabase(getDatabasePath("mansbestfriend.db").toString(), MODE_PRIVATE, null);
 
         Cursor c = db.rawQuery("SELECT Comment FROM Activities WHERE ProfileId == " + profNum + ";", null);
 
@@ -75,6 +72,7 @@ public class ActivityList extends AppCompatActivity {
                 do{
                     comment = c.getString(c.getColumnIndex("Comment"));
                     listItems.add(comment);
+                    Log.e("e",comment);
                 } while(c.moveToNext());
             }
         }
@@ -91,7 +89,11 @@ public class ActivityList extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent newActivity = new Intent(v.getContext(), NewActivity.class);
+                Bundle b = new Bundle();
+                b.putInt("1",profNum);
+                newActivity.putExtras(b);
                 startActivityForResult(newActivity, 0);
+                finishActivity(1);
             }
         });
     }

@@ -66,11 +66,11 @@ public class Database extends AppCompatActivity {
 
         selectedBreed = (String) dbDropdown.getSelectedItem().toString();
 
-        Cursor c = db.rawQuery("SELECT * FROM Breeds WHERE Name == 'Labrador Retriever';", null);
+        Cursor c = db.rawQuery("SELECT Name FROM Breeds WHERE Name == 'Labrador Retriever';", null);
         if(c.moveToFirst()){
-                dbQuery = c.getString(c.getColumnIndex("MiscInfo"));
+                dbQuery = c.getString(c.getColumnIndex("Name"));
             Log.e("e",dbQuery);
-        }while(c.moveToNext())
+        }while(c.moveToNext());
 
         dbInfoText.setText(dbQuery);
     }

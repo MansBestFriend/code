@@ -8,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -63,11 +64,12 @@ public class Database extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, breedList);
         dbDropdown.setAdapter(adapter);
 
-        selectedBreed = (String) dbDropdown.getSelectedItem();
+        selectedBreed = (String) dbDropdown.getSelectedItem().toString();
 
-        Cursor c = db.rawQuery("SELECT * FROM Breeds;", null);
+        Cursor c = db.rawQuery("SELECT * FROM Breeds WHERE Name == 'Labrador Retriever';", null);
         if(c.moveToFirst()){
-                dbQuery = c.getString(c.getColumnIndex("Name"));
+                dbQuery = c.getString(c.getColumnIndex("MiscInfo"));
+            Log.e("e",dbQuery);
         }while(c.moveToNext())
 
         dbInfoText.setText(dbQuery);

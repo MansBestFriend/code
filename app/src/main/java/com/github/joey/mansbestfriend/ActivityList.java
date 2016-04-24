@@ -42,9 +42,12 @@ public class ActivityList extends AppCompatActivity {
 
         //SQLiteDatabase db = this.openOrCreateDatabase(getDatabasePath("mansbestfriend.db").toString(), MODE_PRIVATE, null);
 
-        Cursor c = db.rawQuery("SELECT Comment FROM Activities WHERE ProfileId == " + profNum + ";", null);
+        Cursor c = db.rawQuery("SELECT * FROM Activities WHERE ProfileId == " + profNum + ";", null);
 
         String comment = "";
+        String title = "";
+        String dateTime = "";
+        String activity = "";
 
         /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -71,7 +74,10 @@ public class ActivityList extends AppCompatActivity {
             if(c.moveToFirst()){
                 do{
                     comment = c.getString(c.getColumnIndex("Comment"));
-                    listItems.add(comment);
+                    title = c.getString(c.getColumnIndex("Title"));
+                    dateTime = c.getString(c.getColumnIndex("DateTime"));
+                    activity = title + ": " + comment + " (" + dateTime +")";
+                    listItems.add(activity);
                     Log.e("e",comment);
                 } while(c.moveToNext());
             }

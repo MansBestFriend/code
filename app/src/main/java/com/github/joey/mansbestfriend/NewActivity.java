@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.DateFormat;
 import java.util.Date;
 
 public class NewActivity extends AppCompatActivity {
@@ -61,9 +62,10 @@ public class NewActivity extends AppCompatActivity {
                 EditText commentText = (EditText) findViewById(R.id.activityComment);
                 String commentStr = commentText.getText().toString();
                 String title = activityDropdown.getSelectedItem().toString();
+                String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
                 ContentValues values = new ContentValues();
                 values.put("Number",num);
-                values.put("DateTime",1.0);
+                values.put("DateTime",currentDateTimeString);
                 values.put("Title",title);
                 values.put("Comment", commentStr);
                 values.put("ProfileId", profNum);

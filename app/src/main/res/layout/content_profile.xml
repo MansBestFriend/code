@@ -112,14 +112,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ageText"
-        android:layout_above="@+id/sexRadioGroup"
-        android:layout_alignLeft="@+id/textView"
-        android:layout_alignStart="@+id/textView"
-        android:layout_marginLeft="49dp"
-        android:layout_marginStart="49dp"
-        android:layout_alignRight="@+id/textView"
-        android:layout_alignEnd="@+id/textView"
-        android:hint="Age" />
+        android:hint="Age"
+        android:layout_below="@+id/dogName"
+        android:layout_toRightOf="@+id/createProfBtn"
+        android:layout_toEndOf="@+id/createProfBtn" />
 
     <EditText
         android:layout_width="wrap_content"

@@ -117,9 +117,9 @@
         android:layout_alignStart="@+id/textView"
         android:layout_marginLeft="49dp"
         android:layout_marginStart="49dp"
-        android:text="Age"
         android:layout_alignRight="@+id/textView"
-        android:layout_alignEnd="@+id/textView" />
+        android:layout_alignEnd="@+id/textView"
+        android:hint="Age" />
 
     <EditText
         android:layout_width="wrap_content"

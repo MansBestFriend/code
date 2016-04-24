@@ -35,26 +35,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
         android:ems="10"
         android:id="@+id/dogName"
         android:layout_marginTop="33dp"
         android:layout_below="@+id/textView"
         android:layout_toLeftOf="@+id/textView"
-        android:layout_toStartOf="@+id/textView" />
+        android:layout_toStartOf="@+id/textView"
+        android:hint="Name" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Weight"
         android:ems="10"
         android:id="@+id/dogWeight"
         android:layout_below="@+id/dogName"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/dogName"
-        android:layout_alignEnd="@+id/dogName" />
+        android:layout_alignEnd="@+id/dogName"
+        android:hint="Weight" />
 
     <Spinner
         android:layout_width="100dp"
@@ -131,8 +131,8 @@
         android:layout_alignStart="@+id/textView"
         android:layout_alignTop="@+id/sexRadioGroup"
         android:layout_alignBottom="@+id/breedSpinner"
-        android:text="Comments"
-        android:background="#ffffff" />
+        android:background="#ffffff"
+        android:hint="Comments" />
 
     <Button
         android:layout_width="wrap_content"

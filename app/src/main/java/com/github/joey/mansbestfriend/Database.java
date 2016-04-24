@@ -25,7 +25,12 @@ public class Database extends AppCompatActivity {
         final HandleDB helper = new HandleDB(getApplicationContext());
         final SQLiteDatabase db = helper.getReadableDatabase();
         String dbQuery = "";
-        TextView dbInfoText = (TextView) findViewById(R.id.dbTextView);
+        String infoText = "";
+        String type = "";
+        String disposition = "";
+        String grooming = "";
+        String health = "";
+        TextView dbInfoText = (TextView) findViewById(R.id.dogInfoText);
 
         String selectedBreed;
         /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -72,7 +77,10 @@ public class Database extends AppCompatActivity {
             Log.e("e",dbQuery);
         }while(c.moveToNext());
 
-        dbInfoText.setText(dbQuery);
+        infoText = "General Information\n\n" + type + "\n\n" + "Disposition\n\n" + disposition + "\n\n" +
+                "Grooming\n\n" + grooming + "\n\n" + "Health\n\n" + health + "\n\n";
+
+        dbInfoText.setText(infoText);
     }
 
 }

@@ -45,7 +45,7 @@ public class NewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Cursor c = db.rawQuery("SELECT Number FROM Activities WHERE ProfileId == " + profNum + ";", null);
+                Cursor c = db.rawQuery("SELECT Number FROM Activities;", null);
 
                 String numberStr = "";
 

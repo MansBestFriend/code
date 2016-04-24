@@ -39,7 +39,7 @@ public class NewReminder extends AppCompatActivity {
             @Override
             public void onClick(View v){
 
-                Cursor c = db.rawQuery("SELECT Number FROM Reminders WHERE ProfileId == " + profNum + ";", null);
+                Cursor c = db.rawQuery("SELECT Number FROM Reminders;", null);
                 String numberStr = "";
                 if(c != null){
                     if(c.moveToFirst()){

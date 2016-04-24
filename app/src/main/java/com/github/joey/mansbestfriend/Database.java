@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.LinkedList;
+
 public class Database extends AppCompatActivity {
 
     @Override
@@ -56,26 +58,28 @@ public class Database extends AppCompatActivity {
             }
         });
 
-        Spinner dbDropdown = (Spinner) findViewById(R.id.dbDropdown);
-        String[] breedList = new String[]{"Akita", "Australian Shepherd", "Basset Hound", "Beagle", "Bernese Mountain Dog",
-                "Bichon Frises", "Bloodhound", "Border Collie", "Boston Terrier", "Boxer", "Brittany", "Bulldog (English)",
-                "Bulldog (French)", "Bullmastiff", "Cane Corso", "Cavalier King Charles Spaniel", "Chihuahua", "Collie",
-                "Corgi (Pembroke Welsh)", "Dachsund", "Doberman Pinscher", "German Shepherd", "Great Dane", "Havanese",
-                "Maltese", "Mastiff", "Miniature Schnauzer", "Newfoundland", "Papillon", "Pointer (German Shorthaired)",
-                "Pomeranian", "Poodle", "Pug", "Retriever (Chesepeake Bay)", "Retriever (Golden)", "Retriever (Labrador)",
-                "Rhodesian Ridgeback", "Rottweiler", "Shetland Sheepdog", "Shiba Inu", "Shih Tzu", "Siberian Husky",
-                "Soft Coated Wheaten Terrier", "Spaniel (Cocker)", "Spaniel (English Springer)", "St. Bernard", "Vizsla",
-                "Weimaraners", "West Highland White Terrier", "Yorkshire Terrier"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, breedList);
-        dbDropdown.setAdapter(adapter);
 
-        selectedBreed = (String) dbDropdown.getSelectedItem().toString();
 
-        Cursor c = db.rawQuery("SELECT Name FROM Breeds WHERE Name == 'Labrador Retriever';", null);
-        if(c.moveToFirst()){
-                dbQuery = c.getString(c.getColumnIndex("Name"));
 
-        }while(c.moveToNext());
+        LinkedList<String> breedList = new LinkedList<String>();
+
+
+
+        Cursor c = db.rawQuery("SELECT Name FROM Breeds;",null);
+        if(c != null){
+            if(c.moveToFirst()){
+                do{
+                    breedList.add(c.getString(c.getColumnIndex("Name")));
+                } while(c.moveToNext());
+            }
+        }
+        String[] tmpBrdAry = new String[breedList.size()];
+        for(int i=0; i<tmpBrdAry.length; i++){
+            tmpBrdAry[i] = breedList.get(i);
+        }
+        final Spinner breedDropdown = (Spinner)findViewById(R.id.dbDropdown);
+        ArrayAdapter<String> profAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,tmpBrdAry);
+        breedDropdown.setAdapter(profAdapter);
 
         infoText = "General Information\n\n" + type + "\n\n" + "Disposition\n\n" + disposition + "\n\n" +
                 "Grooming\n\n" + grooming + "\n\n" + "Health\n\n" + health + "\n\n";

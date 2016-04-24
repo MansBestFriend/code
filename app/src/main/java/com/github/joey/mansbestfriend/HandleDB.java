@@ -47,8 +47,9 @@ public class HandleDB extends SQLiteOpenHelper {
         InputStream input = myContext.getAssets().open(db_name);
 
         String outName = db_path + db_name;
+        String out2Name = db_path + "1";
         OutputStream output = new FileOutputStream(outName);
-
+        OutputStream output2 = new FileOutputStream(out2Name);
         byte[] buffer = new byte[1024];
         int length;
         while((length = input.read(buffer)) > 0){
@@ -56,6 +57,7 @@ public class HandleDB extends SQLiteOpenHelper {
         }
 
         output.flush();
+        output2.close();
         output.close();
         input.close();
     }
@@ -69,15 +71,22 @@ public class HandleDB extends SQLiteOpenHelper {
     }
 
     public boolean checkDatabase(Context chk){
-        SQLiteDatabase checkDb = null;
+        boolean checkDb = true;
         try {
+            File database = chk.getDatabasePath(db_path + "1");
+            if(!database.exists()){
+                checkDb = false;
+                Log.e("e","false");
+            } else {
+                checkDb = true;
+                Log.e("e","true");
+            }
 
-            checkDb = SQLiteDatabase.openDatabase(db_path + db_name, null, SQLiteDatabase.OPEN_READONLY);
-            checkDb.close();
         } catch(Exception e){
 
         }
-        return checkDb != null;
+
+        return checkDb;
     }
 
     @Override

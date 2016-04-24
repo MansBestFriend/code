@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 public class ActivityList extends AppCompatActivity {
@@ -70,6 +71,7 @@ public class ActivityList extends AppCompatActivity {
 
 
 
+
         if(c != null){
             if(c.moveToFirst()){
                 do{
@@ -84,7 +86,9 @@ public class ActivityList extends AppCompatActivity {
         }
 
         if(!comment.isEmpty()){
+            Collections.reverse(listItems);
             ArrayAdapter<String> activityListAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, listItems);
+            //Collections.reverse(listItems);
             activityListView.setAdapter(activityListAdapter);
         }
 

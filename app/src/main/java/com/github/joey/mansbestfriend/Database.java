@@ -1,6 +1,8 @@
 package com.github.joey.mansbestfriend;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class Database extends AppCompatActivity {
 
@@ -17,6 +20,13 @@ public class Database extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_database);
+
+        final HandleDB helper = new HandleDB(getApplicationContext());
+        final SQLiteDatabase db = helper.getReadableDatabase();
+        String dbQuery = "";
+        TextView dbInfoText = (TextView) findViewById(R.id.dbTextView);
+
+        String selectedBreed;
         /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -53,6 +63,14 @@ public class Database extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, breedList);
         dbDropdown.setAdapter(adapter);
 
+        selectedBreed = (String) dbDropdown.getSelectedItem();
+
+        Cursor c = db.rawQuery("SELECT * FROM Breeds;", null);
+        if(c.moveToFirst()){
+                dbQuery = c.getString(c.getColumnIndex("Name"));
+        }while(c.moveToNext())
+
+        dbInfoText.setText(dbQuery);
     }
 
 }

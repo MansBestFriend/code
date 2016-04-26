@@ -15,7 +15,7 @@
     tools:showIn="@layout/activity_profile_main">
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:text="Activities"
         android:id="@+id/activityBtn"
@@ -23,12 +23,93 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:text="Reminders"
         android:id="@+id/remindersBtn"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/activityBtn"
         android:layout_alignEnd="@+id/activityBtn"
-        android:layout_marginBottom="91dp" />
+        android:layout_marginBottom="50dp"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/nameTextView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Age: "
+        android:id="@+id/ageTitle"
+        android:layout_marginTop="170dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/nameTextView"
+        android:layout_toLeftOf="@+id/activityBtn"
+        android:layout_toStartOf="@+id/activityBtn" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Sex:"
+        android:id="@+id/sexTitle"
+        android:textStyle="bold"
+        android:layout_marginTop="38dp"
+        android:layout_below="@+id/ageTitle"
+        android:layout_alignLeft="@+id/ageTitle"
+        android:layout_alignStart="@+id/ageTitle" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Breed:"
+        android:id="@+id/breedTitle"
+        android:layout_marginTop="34dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/sexTitle"
+        android:layout_alignLeft="@+id/sexTitle"
+        android:layout_alignStart="@+id/sexTitle" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/biographyTextView"
+        android:layout_below="@+id/nameTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/ageTextView"
+        android:layout_alignTop="@+id/ageTitle"
+        android:layout_toRightOf="@+id/breedTitle"
+        android:layout_toEndOf="@+id/breedTitle" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/sexTextView"
+        android:layout_alignTop="@+id/sexTitle"
+        android:layout_alignLeft="@+id/ageTextView"
+        android:layout_alignStart="@+id/ageTextView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/breedTextView"
+        android:layout_alignTop="@+id/breedTitle"
+        android:layout_alignLeft="@+id/sexTextView"
+        android:layout_alignStart="@+id/sexTextView"
+        android:layout_marginLeft="10dp"/>
 </RelativeLayout>

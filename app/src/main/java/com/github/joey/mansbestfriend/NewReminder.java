@@ -1,11 +1,16 @@
 package com.github.joey.mansbestfriend;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -39,7 +44,7 @@ public class NewReminder extends AppCompatActivity {
             @Override
             public void onClick(View v){
 
-                Cursor c = db.rawQuery("SELECT Number FROM Reminders WHERE ProfileId == " + profNum + ";", null);
+                Cursor c = db.rawQuery("SELECT Number FROM Reminders;", null);
                 String numberStr = "";
                 if(c != null){
                     if(c.moveToFirst()){
@@ -60,15 +65,16 @@ public class NewReminder extends AppCompatActivity {
                 int hourStr = Integer.parseInt(hours.getText().toString());
                 EditText days = (EditText) findViewById(R.id.daysText);
                 int dayStr = Integer.parseInt(days.getText().toString());
-                int totalMinutes = minStr + (hourStr*60) + (dayStr*24*60);
+                int totalMinutes = (minStr + (hourStr*60) + (dayStr*24*60));
+                int totalSeconds = (totalMinutes * 60) * 1000;
                 ContentValues values = new ContentValues();
                 values.put("Number",num);
                 values.put("Frequency",totalMinutes);
                 values.put("Title",titleStr);
                 values.put("ProfileId", profNum);
-
                 db.insert("Reminders", null, values);
                 db.close();
+                setNotification(getNotification(titleStr),totalSeconds);
 
                 Intent remindMenu = new Intent(v.getContext(),ReminderList.class);
 
@@ -82,6 +88,28 @@ public class NewReminder extends AppCompatActivity {
         });
 
     }
+
+    private void setNotification(Notification not, int time){
+
+        Intent notificationInt = new Intent(this,NotificationSender.class);
+        notificationInt.putExtra(NotificationSender.NOTIFICATION_ID,1);
+        notificationInt.putExtra(NotificationSender.NOTIFICATION, not);
+        PendingIntent pendInt = PendingIntent.getBroadcast(this,0,notificationInt,PendingIntent.FLAG_UPDATE_CURRENT);
+
+        long futTime = SystemClock.elapsedRealtime() + time;
+        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,futTime,pendInt);
+    }
+
+    private Notification getNotification(String title){
+
+        Notification.Builder build = new Notification.Builder(this);
+        build.setContentTitle("Reminder");
+        build.setContentText(title);
+        build.setSmallIcon(R.drawable.mansbestfriendicon);
+        return build.build();
+    }
+
     public void setupUI(View view) {
 
         //Set up touch listener for non-text box views to hide keyboard.

@@ -23,6 +23,7 @@ import android.widget.RelativeLayout;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.TreeMap;
 
 //Test
 public class MainActivity extends AppCompatActivity {
@@ -128,24 +129,38 @@ public class MainActivity extends AppCompatActivity {
     public void updateProfList(){
         HandleDB helper = new HandleDB(getApplicationContext());
         SQLiteDatabase db = helper.getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT Id FROM Profiles;", null);
-
+        Cursor c = db.rawQuery("SELECT Id,PhotoPath FROM Profiles;", null);
+        TreeMap<String,String> imgMap = new TreeMap<String,String>();
         LinkedList<String> profList = new LinkedList<String>();
 
         if(c != null){
             if(c.moveToFirst()){
                 do{
-                    profList.add(c.getString(c.getColumnIndex("Id")));
+                    String tmp = c.getString(c.getColumnIndex("Id"));
+                    profList.add(tmp);
+                    if(tmp != null && !tmp.isEmpty()) {
+                        String tmpPath = c.getString(c.getColumnIndex("PhotoPath"));
+                        if(tmpPath != null && !tmpPath.isEmpty()) {
+                            imgMap.put(tmp, tmpPath);
+
+                            Log.e("e", tmp);
+                        }
+
+
+                    }
                 } while(c.moveToNext());
             }
         }
         String[] sampleTxt = new String[profList.size()];
         Integer[] imageList = new Integer[profList.size()];
+        String[] imgPathList = new String[profList.size()];
         for(int i=0; i<profList.size(); i++){
+
             imageList[i] = R.drawable.dog;
             sampleTxt[i] = "";
+
         }
-        CustomList adapter = new CustomList(MainActivity.this,sampleTxt,imageList);
+        CustomList adapter = new CustomList(MainActivity.this,sampleTxt,imageList,imgMap);
         ListView pList = (ListView)findViewById(R.id.profileList);
         pList.setAdapter(adapter);
         pList.setOnItemClickListener(new AdapterView.OnItemClickListener(){

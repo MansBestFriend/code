@@ -4,8 +4,13 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.Matrix;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -18,13 +23,21 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.LinkedList;
 
 public class Profile extends AppCompatActivity {
 
+    ImageButton photoBtn;
+    final int PICK_IMAGE_REQUEST = 1;
+    TextView photoText;
+    String path;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,8 +47,8 @@ public class Profile extends AppCompatActivity {
         final HandleDB helper = new HandleDB(getApplicationContext());
         final SQLiteDatabase db = helper.getWritableDatabase();
         LinkedList<String> breedList = new LinkedList<String>();
-
-
+        photoText = (TextView)findViewById(R.id.selectPhotoText);
+        photoBtn = (ImageButton)findViewById(R.id.selectPhoto);
 
         Cursor c = db.rawQuery("SELECT Name FROM Breeds;",null);
         if(c != null){
@@ -54,6 +67,17 @@ public class Profile extends AppCompatActivity {
         breedDropdown.setAdapter(profAdapter);
 
         Button enterProf = (Button)findViewById(R.id.createProfBtn);
+
+        photoBtn.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent,"Select Picture"), PICK_IMAGE_REQUEST);
+            }
+        });
         enterProf.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -95,6 +119,11 @@ public class Profile extends AppCompatActivity {
                     values.put("Sex", sexStr);
                     values.put("Biography", commentStr);
                     values.put("BreedName", breedStr);
+                    if(path != null){
+                        values.put("PhotoPath",path);
+                    } else {
+                        values.put("PhotoPath","");
+                    }
                     db.insert("Profiles", null, values);
                     db.close();
                     Intent resultIntent = new Intent(v.getContext(),MainActivity.class);
@@ -151,6 +180,31 @@ public class Profile extends AppCompatActivity {
     public static void hideSoftKeyboard(Activity activity) {
         InputMethodManager inputMethodManager = (InputMethodManager)  activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+
+        if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null){
+
+            Uri uri = data.getData();
+
+            try{
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                int x = photoBtn.getWidth();
+                int y = photoBtn.getHeight();
+                Bitmap scaleBitmap = Bitmap.createScaledBitmap(bitmap,y,x,true);
+                Matrix m = new Matrix();
+                m.postRotate(90);
+                Bitmap rotatedBM = Bitmap.createBitmap(scaleBitmap,0,0,scaleBitmap.getWidth(),scaleBitmap.getHeight(),m,true);
+                path = ImageFilePath.getPath(getApplicationContext(), uri);
+                photoBtn.setImageBitmap(rotatedBM);
+                photoText.setVisibility(TextView.INVISIBLE);
+            } catch(IOException e){
+                e.printStackTrace();
+            }
+        }
     }
 
 }

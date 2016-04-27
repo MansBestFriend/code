@@ -91,7 +91,7 @@ public class EditReminder extends AppCompatActivity {
                 data.put("ProfileId", profNum);
                 db.update("Reminders", data, "Number=" + id, null);
                 db.close();
-                NotificationSender.unscheduleAlarm(getApplicationContext(),String.valueOf(profNum),curTitle,newFreq,id);
+                NotificationSender.unscheduleAlarm(getApplicationContext(),String.valueOf(profNum),curTitle,newFreq);
                 HashMap<String,ArrayList<String>> idToDat = new HashMap<String,ArrayList<String>>();
                 ArrayList<String> profileList = new ArrayList<String>();
                 HandleDB helper2 = new HandleDB(getApplicationContext());
@@ -111,10 +111,8 @@ public class EditReminder extends AppCompatActivity {
                             }
                             String cTitle = u.getString(u.getColumnIndex("Title"));
                             String cFreq = u.getString(u.getColumnIndex("Frequency"));
-                            String cId = u.getString(u.getColumnIndex("Number"));
                             cur.add(cTitle);
                             cur.add(cFreq);
-                            cur.add(cId);
                             idToDat.put(curId, cur);
                         } while(u.moveToNext());
                     }
@@ -135,13 +133,12 @@ public class EditReminder extends AppCompatActivity {
                 Set<String> nameKeys = nameToDat.keySet();
                 for(String s : nameKeys){
                     ArrayList<String> curRems = nameToDat.get(s);
-                    for(int i=0; i<curRems.size(); i+=3){
+                    for(int i=0; i<curRems.size(); i+=2){
                         String curTitle = curRems.get(i);
                         String curFreq = curRems.get(i+1);
-                        String curId = curRems.get(i+2);
                         int timeInt = Integer.parseInt(curFreq);
-                        int idInt = Integer.parseInt(curId);
-                        NotificationSender.scheduleAlarms(getApplicationContext(),s,curTitle,timeInt,idInt);
+                        NotificationSender.scheduleAlarms(getApplicationContext(),s,curTitle,timeInt);
+
                     }
                 }
 

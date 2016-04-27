@@ -35,7 +35,7 @@ public class NotificationSender extends BroadcastReceiver {
 //        Log.e("e", "notify");
     }
 
-    static void scheduleAlarms(Context c,String name, String title, int time, int id){
+    static void scheduleAlarms(Context c,String name, String title, int time){
 
         AlarmManager mgr = (AlarmManager)c.getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(c,BackgroundService.class);
@@ -47,8 +47,7 @@ public class NotificationSender extends BroadcastReceiver {
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.SECOND, time);
         long tmpTime = 1000 * time;
-
-        PendingIntent p = PendingIntent.getService(c,id,i,0);
+        PendingIntent p = PendingIntent.getService(c,0,i,0);
         mgr.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), tmpTime, p);
 
 //        PendingIntent pendInt = PendingIntent.getBroadcast(this,0,new Intent(this,NotificationSender.class),PendingIntent.FLAG_UPDATE_CURRENT);
@@ -60,7 +59,7 @@ public class NotificationSender extends BroadcastReceiver {
 //        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,futTime,tmpTime,pendInt);
     }
 
-    static void unscheduleAlarm(Context c, String name, String title, int time,int id){
+    static void unscheduleAlarm(Context c, String name, String title, int time){
 
         AlarmManager mgr = (AlarmManager)c.getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(c,BackgroundService.class);
@@ -72,7 +71,7 @@ public class NotificationSender extends BroadcastReceiver {
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.SECOND, time);
         long tmpTime = 1000 * time;
-        PendingIntent p = PendingIntent.getService(c,id,i,0);
+        PendingIntent p = PendingIntent.getService(c,0,i,0);
         mgr.cancel(p);
     }
 }

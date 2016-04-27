@@ -88,7 +88,7 @@ public class NewReminder extends AppCompatActivity {
                 values.put("ProfileId", profNum);
                 db.insert("Reminders", null, values);
                 db.close();
-                NotificationSender.scheduleAlarms(getApplicationContext(),nameStr, titleStr, totalSeconds,num);
+                NotificationSender.scheduleAlarms(getApplicationContext(),nameStr, titleStr, totalSeconds);
 
                 Intent remindMenu = new Intent(v.getContext(), ReminderList.class);
 

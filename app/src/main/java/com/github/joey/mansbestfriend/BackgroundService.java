@@ -38,7 +38,7 @@ public class BackgroundService extends Service {
             Bundle b = intent.getExtras();
             if(b != null) {
                 Log.d(getClass().getSimpleName(), "I ran!");
-                //String strTime = b.get("time").toString();
+                String strTime = b.get("time").toString();
                 String strName = b.get("name").toString();
                 String strTitle = b.get("title").toString();
                 Intent i = new Intent(this, NotificationSender.class);

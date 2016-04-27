@@ -58,4 +58,20 @@ public class NotificationSender extends BroadcastReceiver {
 //        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
 //        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,futTime,tmpTime,pendInt);
     }
+
+    static void unscheduleAlarm(Context c, String name, String title, int time){
+
+        AlarmManager mgr = (AlarmManager)c.getSystemService(Context.ALARM_SERVICE);
+        Intent i = new Intent(c,BackgroundService.class);
+        Bundle b = new Bundle();
+        b.putString("name",name);
+        b.putString("title",title);
+        b.putInt("time",time);
+        i.putExtras(b);
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.SECOND, time);
+        long tmpTime = 1000 * time;
+        PendingIntent p = PendingIntent.getService(c,0,i,0);
+        mgr.cancel(p);
+    }
 }

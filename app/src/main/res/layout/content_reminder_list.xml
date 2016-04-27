@@ -38,5 +38,15 @@
         android:text="Add New Reminder"
         android:id="@+id/addNewReminderButton"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remove"
+        android:id="@+id/testBtn"
+        android:layout_alignTop="@+id/addNewReminderButton"
+        android:layout_alignRight="@+id/remindersList"
+        android:layout_alignEnd="@+id/remindersList" />
 </RelativeLayout>

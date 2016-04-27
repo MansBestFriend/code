@@ -83,6 +83,15 @@ public class ReminderList extends AppCompatActivity {
             }
         });
 
+        Button testDel = (Button)findViewById(R.id.testBtn);
+        testDel.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v){
+                NotificationSender.unscheduleAlarm(getApplicationContext(),"Spot","Title",60);
+            }
+        });
+
     }
 
 }

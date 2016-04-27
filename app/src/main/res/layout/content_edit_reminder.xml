@@ -113,6 +113,7 @@
         android:layout_alignBottom="@+id/minField"
         android:layout_alignLeft="@+id/newTxt"
         android:layout_alignStart="@+id/newTxt"
+        android:inputType="number"
         android:hint="Mintutes" />
 
     <EditText
@@ -124,6 +125,7 @@
         android:layout_alignStart="@+id/editMin"
         android:layout_alignRight="@+id/editMin"
         android:layout_alignEnd="@+id/editMin"
+        android:inputType="number"
         android:hint="Hours" />
 
     <EditText
@@ -135,6 +137,7 @@
         android:layout_alignStart="@+id/editHr"
         android:layout_alignRight="@+id/editHr"
         android:layout_alignEnd="@+id/editHr"
+        android:inputType="number"
         android:hint="Days" />
 
     <Button

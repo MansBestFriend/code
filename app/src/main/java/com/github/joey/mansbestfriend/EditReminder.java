@@ -75,6 +75,8 @@ public class EditReminder extends AppCompatActivity {
 
             @Override
             public void onClick(View v){
+
+                stopService(new Intent(EditReminder.this,BackgroundService.class));
                 EditText newMin = (EditText)findViewById(R.id.editMin);
                 EditText newHour = (EditText)findViewById(R.id.editHr);
                 EditText newDay = (EditText)findViewById(R.id.editDay);

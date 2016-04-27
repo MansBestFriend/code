@@ -106,6 +106,7 @@ public class ActivityList extends AppCompatActivity {
                 finishActivity(1);
             }
         });
+
     }
 
 

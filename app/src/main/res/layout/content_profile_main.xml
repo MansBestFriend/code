@@ -12,7 +12,9 @@
     android:background="#e2f2fd"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.github.joey.mansbestfriend.ProfileMain"
-    tools:showIn="@layout/activity_profile_main">
+    tools:showIn="@layout/activity_profile_main"
+    android:focusable="true"
+    android:focusableInTouchMode ="true">
 
     <Button
         android:layout_width="110dp"
@@ -112,4 +114,72 @@
         android:layout_alignLeft="@+id/sexTextView"
         android:layout_alignStart="@+id/sexTextView"
         android:layout_marginLeft="10dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit Profile"
+        android:id="@+id/editProfileButton"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editAgeTextField"
+        android:layout_toRightOf="@+id/ageTitle"
+        android:layout_alignBottom="@id/ageTextView"
+        android:focusable="true"
+        android:focusableInTouchMode ="true"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editSexTextField"
+        android:layout_toRightOf="@+id/sexTitle"
+        android:layout_alignBottom="@id/sexTextView"
+        android:focusable="true"
+        android:focusableInTouchMode ="true"
+        />
+
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/editBiographyTextField"
+        android:layout_alignTop="@+id/biographyTextView"
+        android:layout_centerHorizontal="true"
+        android:focusable="true"
+        android:focusableInTouchMode ="true"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editNameTextField"
+        android:layout_centerHorizontal ="true"
+        android:focusable="true"
+        android:focusableInTouchMode ="true"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:id="@+id/submitProfileButton"
+        android:layout_alignTop="@+id/editProfileButton"
+        android:layout_centerHorizontal="true" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:id="@+id/editBreedDropdown"
+        android:spinnerMode="dropdown"
+        android:layout_alignBottom="@id/breedTitle"
+        android:layout_toRightOf="@id/breedTitle"
+        android:layout_marginTop="15dp"
+        />
 </RelativeLayout>

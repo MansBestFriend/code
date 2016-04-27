@@ -64,4 +64,13 @@
         android:layout_below="@+id/newProfileButton"
         android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Icon: pet adoption by Dan Hetteix from the Noun Project"
+        android:textSize="10dp"
+        android:id="@+id/iconTextView"
+        android:layout_marginTop="523dp"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

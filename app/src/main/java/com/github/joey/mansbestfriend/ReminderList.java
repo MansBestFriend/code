@@ -31,7 +31,7 @@ public class ReminderList extends AppCompatActivity {
 
         Log.e("db",getDatabasePath("mansbestfriend.db").toString());
 
-        SQLiteDatabase db = helper.getReadableDatabase();
+        final SQLiteDatabase db = helper.getReadableDatabase();
 
         Cursor c = db.rawQuery("SELECT Title FROM Reminders WHERE ProfileId == " + profNum + ";", null);
 
@@ -104,7 +104,15 @@ public class ReminderList extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+                db.delete("Reminders",null,null);
                 NotificationSender.unscheduleAlarm(getApplicationContext(), "Spot", "Title", 60);
+                Intent refresh = new Intent(v.getContext(),ReminderList.class);
+                Bundle b = new Bundle();
+                b.putInt("1",profNum);
+                refresh.putExtras(b);
+                startActivityForResult(refresh,0);
+                finishActivity(1);
+                finish();
 
             }
         });

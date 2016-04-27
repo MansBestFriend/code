@@ -67,7 +67,7 @@ public class EditReminder extends AppCompatActivity {
         EditText dayField = (EditText)findViewById(R.id.dayField);
         oldMin.setText(String.valueOf(minutes), TextView.BufferType.EDITABLE);
         oldHour.setText(String.valueOf(hours), TextView.BufferType.EDITABLE);
-        dayField.setText("0",TextView.BufferType.EDITABLE);
+        dayField.setText("0", TextView.BufferType.EDITABLE);
 
 
         Button updateRem = (Button)findViewById(R.id.updateRmBtn);
@@ -154,6 +154,24 @@ public class EditReminder extends AppCompatActivity {
                 finish();
 
             }
+        });
+
+        Button delRemindBtn = (Button)findViewById(R.id.delRemindBtn);
+        delRemindBtn.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v){
+                db.delete("Reminders","Number="+id,null);
+                NotificationSender.unscheduleAlarm(getApplicationContext(), String.valueOf(profNum), curTitle, 0);
+                Intent remindMenu = new Intent(v.getContext(),ReminderList.class);
+                Bundle b = new Bundle();
+                b.putInt("1",profNum);
+                remindMenu.putExtras(b);
+                startActivityForResult(remindMenu, 0);
+                finishActivity(1);
+                finish();
+            }
+
         });
     }
 

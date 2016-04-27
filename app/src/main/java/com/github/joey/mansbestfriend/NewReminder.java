@@ -66,8 +66,12 @@ public class NewReminder extends AppCompatActivity {
                         } while(c.moveToNext());
                     }
                 }
-                int num = Integer.parseInt(numberStr) + 1;
-
+                int num;
+                if(numberStr.isEmpty()){
+                    num = 1;
+                } else {
+                    num = Integer.parseInt(numberStr) + 1;
+                }
                 EditText title = (EditText) findViewById(R.id.reminderTitle);
                 String titleStr = title.getText().toString();
                 if(titleStr.isEmpty()){

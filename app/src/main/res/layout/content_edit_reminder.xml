@@ -146,5 +146,15 @@
         android:text="Update Reminder"
         android:id="@+id/updateRmBtn"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        android:id="@+id/delRemindBtn"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/editDay"
+        android:layout_alignEnd="@+id/editDay" />
 </RelativeLayout>

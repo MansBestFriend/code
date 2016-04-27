@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -22,6 +23,8 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+
+import java.util.Calendar;
 
 public class NewReminder extends AppCompatActivity {
 
@@ -39,47 +42,58 @@ public class NewReminder extends AppCompatActivity {
 
         Button enterReminder = (Button) findViewById(R.id.enterRemindBtn);
 
-        enterReminder.setOnClickListener(new View.OnClickListener(){
+        enterReminder.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
 
                 Cursor c = db.rawQuery("SELECT Number FROM Reminders;", null);
                 String numberStr = "";
-                if(c != null){
-                    if(c.moveToFirst()){
-                        do{
+                String nameStr = "";
+                if (c != null) {
+                    if (c.moveToFirst()) {
+                        do {
                             numberStr = c.getString(c.getColumnIndex("Number"));
-                            Log.e("e",numberStr);
+                            Log.e("e", numberStr);
+                        } while (c.moveToNext());
+                    }
+                }
+                c = db.rawQuery("SELECT Name FROM Profiles WHERE Id == " + profNum + ";", null);
+                if (c != null) {
+                    if (c.moveToFirst()) {
+                        do {
+                            nameStr = c.getString(c.getColumnIndex("Name"));
                         } while(c.moveToNext());
                     }
                 }
-
                 int num = Integer.parseInt(numberStr) + 1;
 
                 EditText title = (EditText) findViewById(R.id.reminderTitle);
                 String titleStr = title.getText().toString();
+                if(titleStr.isEmpty()){
+                    titleStr = "Unknown";
+                }
                 EditText minutes = (EditText) findViewById(R.id.minutesText);
                 int minStr = Integer.parseInt(minutes.getText().toString());
                 EditText hours = (EditText) findViewById(R.id.hoursText);
                 int hourStr = Integer.parseInt(hours.getText().toString());
                 EditText days = (EditText) findViewById(R.id.daysText);
                 int dayStr = Integer.parseInt(days.getText().toString());
-                int totalMinutes = (minStr + (hourStr*60) + (dayStr*24*60));
-                int totalSeconds = (totalMinutes * 60) * 1000;
+                int totalMinutes = (minStr + (hourStr * 60) + (dayStr * 24 * 60));
+                int totalSeconds = (totalMinutes * 60);
                 ContentValues values = new ContentValues();
-                values.put("Number",num);
-                values.put("Frequency",totalMinutes);
-                values.put("Title",titleStr);
+                values.put("Number", num);
+                values.put("Frequency", totalMinutes);
+                values.put("Title", titleStr);
                 values.put("ProfileId", profNum);
                 db.insert("Reminders", null, values);
                 db.close();
-                setNotification(getNotification(titleStr),totalSeconds);
+                NotificationSender.scheduleAlarms(getApplicationContext(),nameStr, titleStr, totalSeconds);
 
-                Intent remindMenu = new Intent(v.getContext(),ReminderList.class);
+                Intent remindMenu = new Intent(v.getContext(), ReminderList.class);
 
                 Bundle b = new Bundle();
-                b.putInt("1",profNum);
+                b.putInt("1", profNum);
                 remindMenu.putExtras(b);
                 startActivityForResult(remindMenu, 0);
                 finishActivity(1);
@@ -89,26 +103,18 @@ public class NewReminder extends AppCompatActivity {
 
     }
 
-    private void setNotification(Notification not, int time){
+    private void setNotification(int time){
 
-        Intent notificationInt = new Intent(this,NotificationSender.class);
-        notificationInt.putExtra(NotificationSender.NOTIFICATION_ID,1);
-        notificationInt.putExtra(NotificationSender.NOTIFICATION, not);
-        PendingIntent pendInt = PendingIntent.getBroadcast(this,0,notificationInt,PendingIntent.FLAG_UPDATE_CURRENT);
 
-        long futTime = SystemClock.elapsedRealtime() + time;
+        PendingIntent pendInt = PendingIntent.getBroadcast(this, 0, new Intent(this, NotificationSender.class), PendingIntent.FLAG_UPDATE_CURRENT);
+        Calendar c = Calendar.getInstance();
+        long tmpTime = 1000 * time;
+        c.add(Calendar.SECOND,time);
+        long futTime = c.getTimeInMillis();
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,futTime,pendInt);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, futTime, tmpTime, pendInt);
     }
 
-    private Notification getNotification(String title){
-
-        Notification.Builder build = new Notification.Builder(this);
-        build.setContentTitle("Reminder");
-        build.setContentText(title);
-        build.setSmallIcon(R.drawable.mansbestfriendicon);
-        return build.build();
-    }
 
     public void setupUI(View view) {
 

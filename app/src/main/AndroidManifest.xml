@@ -4,7 +4,9 @@
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <application
         android:allowBackup="true"
         android:icon="@drawable/mansbestfriendicon"
@@ -58,7 +60,19 @@
             android:name=".NewBark"
             android:label="@string/title_activity_new_bark"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <receiver android:name=".NotificationSender"/>
+        <receiver android:name=".NotificationSender">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="NOTIFICATION_SERVICE"/>
+            </intent-filter>
+            </receiver>
+        <service android:name=".BackgroundService">
+            <intent-filter>
+                <action android:name="NOTIFICATION_SERVICE"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

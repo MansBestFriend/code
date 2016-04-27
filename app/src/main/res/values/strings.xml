@@ -10,6 +10,7 @@
     <string name="title_activity_new">NewActivity</string>
     <string name="title_activity_barks_list">BarksList</string>
     <string name="title_activity_new_bark">NewBark</string>
+    <string name="title_activity_edit_reminder">EditReminder</string>
 </resources>
 
 

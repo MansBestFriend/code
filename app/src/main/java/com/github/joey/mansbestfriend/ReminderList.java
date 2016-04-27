@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -36,7 +37,7 @@ public class ReminderList extends AppCompatActivity {
 
         String title = "";
 
-        ListView remindList = (ListView) findViewById(R.id.remindersList);
+        final ListView remindList = (ListView) findViewById(R.id.remindersList);
         ArrayList<String> listItems = new ArrayList<String>();
 
         if(c != null){
@@ -63,6 +64,21 @@ public class ReminderList extends AppCompatActivity {
             Log.e("db","title is empty");
         }
 
+        remindList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View v, int pos, long i2){
+
+                Intent edit = new Intent(v.getContext(),EditReminder.class);
+                Bundle b = new Bundle();
+                b.putInt("num",profNum);
+                String title = remindList.getItemAtPosition(pos).toString();
+                b.putString("title",title);
+                edit.putExtras(b);
+                startActivityForResult(edit,0);
+                finishActivity(1);
+            }
+        });
         Button newRem = (Button) findViewById(R.id.addNewReminderButton);
 
 
@@ -87,8 +103,9 @@ public class ReminderList extends AppCompatActivity {
         testDel.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View v){
-                NotificationSender.unscheduleAlarm(getApplicationContext(),"Spot","Title",60);
+            public void onClick(View v) {
+                NotificationSender.unscheduleAlarm(getApplicationContext(), "Spot", "Title", 60);
+                NotificationSender.scheduleAlarms(getApplicationContext(), "Spot", "Title", 60);
             }
         });
 

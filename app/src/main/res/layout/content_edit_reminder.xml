@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:id="@+id/editRemindParent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.github.joey.mansbestfriend.EditReminder"
+    tools:showIn="@layout/activity_edit_reminder">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Old"
+        android:id="@+id/oldTxt"
+        android:layout_marginTop="47dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="38dp"
+        android:layout_marginStart="38dp"
+        android:textSize="35dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Minutes:"
+        android:id="@+id/minuteTxt"
+        android:layout_below="@+id/oldTxt"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="26dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hours:"
+        android:id="@+id/hourTxt"
+        android:layout_marginTop="89dp"
+        android:layout_below="@+id/minuteTxt"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Days:"
+        android:id="@+id/dayTxt"
+        android:layout_marginTop="81dp"
+        android:layout_below="@+id/hourTxt"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/minField"
+        android:layout_above="@+id/hourTxt"
+        android:layout_toRightOf="@+id/minuteTxt"
+        android:layout_alignRight="@+id/oldTxt"
+        android:layout_alignEnd="@+id/oldTxt"
+        android:text=" " />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/hourField"
+        android:layout_above="@+id/dayTxt"
+        android:layout_toRightOf="@+id/hourTxt"
+        android:layout_alignRight="@+id/oldTxt"
+        android:layout_alignEnd="@+id/oldTxt"
+        android:text=" " />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/dayField"
+        android:layout_alignBottom="@+id/dayTxt"
+        android:layout_toRightOf="@+id/dayTxt"
+        android:layout_alignRight="@+id/hourField"
+        android:layout_alignEnd="@+id/hourField"
+        android:text=" " />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New"
+        android:id="@+id/newTxt"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        android:layout_above="@+id/minuteTxt"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="52dp"
+        android:layout_marginEnd="52dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editMin"
+        android:layout_alignBottom="@+id/minField"
+        android:layout_alignLeft="@+id/newTxt"
+        android:layout_alignStart="@+id/newTxt"
+        android:hint="Mintutes" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editHr"
+        android:layout_alignBottom="@+id/hourTxt"
+        android:layout_alignLeft="@+id/editMin"
+        android:layout_alignStart="@+id/editMin"
+        android:layout_alignRight="@+id/editMin"
+        android:layout_alignEnd="@+id/editMin"
+        android:hint="Hours" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editDay"
+        android:layout_alignBottom="@+id/dayField"
+        android:layout_alignLeft="@+id/editHr"
+        android:layout_alignStart="@+id/editHr"
+        android:layout_alignRight="@+id/editHr"
+        android:layout_alignEnd="@+id/editHr"
+        android:hint="Days" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update Reminder"
+        android:id="@+id/updateRmBtn"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>

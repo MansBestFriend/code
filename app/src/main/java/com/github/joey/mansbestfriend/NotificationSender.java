@@ -67,7 +67,7 @@ public class NotificationSender extends BroadcastReceiver {
         b.putString("name",name);
         b.putString("title",title);
         b.putInt("time",time);
-        i.putExtras(b);
+        //i.putExtras(b);
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.SECOND, time);
         long tmpTime = 1000 * time;

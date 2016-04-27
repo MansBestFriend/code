@@ -104,8 +104,23 @@ public class ReminderList extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                NotificationSender.unscheduleAlarm(getApplicationContext(), "Spot", "Title", 60);
-                NotificationSender.scheduleAlarms(getApplicationContext(), "Spot", "Title", 60);
+
+                HandleDB helper2 = new HandleDB(getApplicationContext());
+                SQLiteDatabase db2 = helper2.getReadableDatabase();
+
+                Cursor s = db2.rawQuery("SELECT Number FROM Reminders;",null);
+
+                if(s != null){
+                    if(s.moveToFirst()){
+                        do{
+                            String curNum = s.getString(s.getColumnIndex("Number"));
+                            int curNumInt = Integer.parseInt(curNum);
+                            NotificationSender.unscheduleAlarm(getApplicationContext(), "Spot", "Title", 60,curNumInt);
+                        }while(s.moveToNext());
+                    }
+                }
+
+
             }
         });
 

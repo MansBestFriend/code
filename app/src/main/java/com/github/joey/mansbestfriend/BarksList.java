@@ -37,9 +37,9 @@ public class BarksList extends AppCompatActivity {
         final ListView barksList = (ListView) findViewById(R.id.barkListView);
         ArrayList<String> barkListItems = new ArrayList<String>();
 
-
-        //Cursor c = db.rawQuery("SELECT * FROM Barks;",null);
         /*
+        Cursor c = db.rawQuery("SELECT * FROM Barks;",null);
+
         if(c != null){
             if(c.moveToFirst()){
                 do{
@@ -54,9 +54,11 @@ public class BarksList extends AppCompatActivity {
         }
         */
 
-        barkString = "Recommendation" + ", Posted " + "April 28, 2:55am" + "\n\n" + "PetSmart is awesome!" + "\n\n" + 4 + " Likes";
-        //barkListItems.add(barkString);
-        //barkListItems.add(barkString);
+
+        barkString = "Recommendation" + ", Posted " + "April 29, 12:06pm" + "\n\n" + "PetSmart is awesome!" + "\n\n" + 4 + " Likes";
+        barkListItems.add(barkString);
+        barkString = "Warning" + ", Posted " + "April 29, 11:23am" + "\n\n" + "Don't walk your dog on 15th street! Too much traffic" + "\n\n" + 8 + " Likes";
+        barkListItems.add(barkString);
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                 this,android.R.layout.simple_list_item_1,barkListItems
@@ -71,6 +73,7 @@ public class BarksList extends AppCompatActivity {
 
                 int Id = barksList.getSelectedItemPosition();
                 int likeNumber2 = 0;
+                /*
 
                 Cursor c2 = db.rawQuery("SELECT likeNumber FROM Barks WHERE ID=" + Id +";",null);
 
@@ -85,6 +88,8 @@ public class BarksList extends AppCompatActivity {
                 ContentValues values = new ContentValues();
                 values.put("likeNumber",likeNumber2+1);
                 db.update("Barks",values,"ID=" + Id,null);
+                */
+
             }
         });
 

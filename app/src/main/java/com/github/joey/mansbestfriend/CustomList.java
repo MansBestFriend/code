@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -93,7 +94,28 @@ public class CustomList extends ArrayAdapter<String>{
         options.inJustDecodeBounds = false;
         Bitmap tmp = BitmapFactory.decodeFile(pathName, options);
         Matrix m = new Matrix();
-        m.postRotate(90);
+        File f = new File(pathName);
+        int rotate = 0;
+        try {
+            ExifInterface exif = new ExifInterface(f.getAbsolutePath());
+            int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION,ExifInterface.ORIENTATION_NORMAL);
+            switch(orientation){
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    rotate = 270;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    rotate = 180;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    rotate = 90;
+                    break;
+            }
+
+            m.postRotate(rotate);
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+
         return Bitmap.createBitmap(tmp,0,0,tmp.getWidth(),tmp.getHeight(),m,true);
 
     }

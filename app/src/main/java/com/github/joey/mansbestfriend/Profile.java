@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -207,6 +208,7 @@ public class Profile extends AppCompatActivity {
                 final BitmapFactory.Options options = new BitmapFactory.Options();
                 options.inJustDecodeBounds = true;
                 path = ImageFilePath.getPath(getApplicationContext(), uri);
+
                 BitmapFactory.decodeFile(path,options);
                 options.inSampleSize = CustomList.calculateInSampleSize(options,photoBtn.getWidth(),photoBtn.getHeight());
                 options.inJustDecodeBounds = false;
@@ -214,11 +216,28 @@ public class Profile extends AppCompatActivity {
 
                 //Bitmap scaleBitmap = Bitmap.createScaledBitmap(bitmap,y,x,true);
                 Matrix m = new Matrix();
-                m.postRotate(90);
-                Bitmap rotatedBM = Bitmap.createBitmap(bitmap,0,0,bitmap.getWidth(),bitmap.getHeight(),m,true);
+                File f = new File(path);
+                int rotate = 0;
+                ExifInterface exif = new ExifInterface(f.getAbsolutePath());
+                int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION,ExifInterface.ORIENTATION_NORMAL);
+                switch(orientation){
+                    case ExifInterface.ORIENTATION_ROTATE_270:
+                        rotate = 270;
+                        break;
+                    case ExifInterface.ORIENTATION_ROTATE_180:
+                        rotate = 180;
+                        break;
+                    case ExifInterface.ORIENTATION_ROTATE_90:
+                        rotate = 90;
+                        break;
+                }
 
-                photoBtn.setImageBitmap(rotatedBM);
+                m.postRotate(rotate);
+                Bitmap rotatedBM = Bitmap.createBitmap(bitmap,0,0,bitmap.getWidth(),bitmap.getHeight(),m,true);
+                Log.e("size", String.valueOf(rotatedBM.getWidth()));
+                photoBtn.setImageBitmap(Bitmap.createScaledBitmap(rotatedBM, 1400, 1000, false));
                 photoText.setVisibility(TextView.INVISIBLE);
+
             } catch(Exception e){
                 e.printStackTrace();
             }

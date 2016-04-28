@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent newProfile = new Intent(v.getContext(), Profile.class);
                 startActivityForResult(newProfile, 3);
-                finish();
+
 
             }
         });

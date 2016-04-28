@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
@@ -203,20 +204,27 @@ public class Profile extends AppCompatActivity {
             Uri uri = data.getData();
 
             try{
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                int x = photoBtn.getWidth();
-                int y = photoBtn.getHeight();
-                Bitmap scaleBitmap = Bitmap.createScaledBitmap(bitmap,y,x,true);
+                final BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inJustDecodeBounds = true;
+                path = ImageFilePath.getPath(getApplicationContext(), uri);
+                BitmapFactory.decodeFile(path,options);
+                options.inSampleSize = CustomList.calculateInSampleSize(options,photoBtn.getWidth(),photoBtn.getHeight());
+                options.inJustDecodeBounds = false;
+                Bitmap bitmap = BitmapFactory.decodeFile(path,options);
+
+                //Bitmap scaleBitmap = Bitmap.createScaledBitmap(bitmap,y,x,true);
                 Matrix m = new Matrix();
                 m.postRotate(90);
-                Bitmap rotatedBM = Bitmap.createBitmap(scaleBitmap,0,0,scaleBitmap.getWidth(),scaleBitmap.getHeight(),m,true);
-                path = ImageFilePath.getPath(getApplicationContext(), uri);
+                Bitmap rotatedBM = Bitmap.createBitmap(bitmap,0,0,bitmap.getWidth(),bitmap.getHeight(),m,true);
+
                 photoBtn.setImageBitmap(rotatedBM);
                 photoText.setVisibility(TextView.INVISIBLE);
-            } catch(IOException e){
+            } catch(Exception e){
                 e.printStackTrace();
             }
         }
     }
+
+
 
 }

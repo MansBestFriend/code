@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -79,9 +81,14 @@ public class ProfileMain extends AppCompatActivity {
             }
         }
 
-        File file = new File(Environment.getExternalStorageDirectory()+File.separator + photoPath);
-        Uri uri = Uri.fromFile(file);
-        background.setImageURI(uri);
+        //File file = new File(photoPath);
+        Bitmap bit = CustomList.decodeSampledBitmapFromResource(this.getResources(),photoPath,100,100);
+        background.setImageBitmap(bit);
+        //background.setImageURI(uri);
+        //Matrix m = new Matrix();
+        //background.setScaleType(ImageView.ScaleType.MATRIX);
+        //m.postRotate(90);
+        //background.setImageMatrix(m);
 
         final String finalName = name;
 

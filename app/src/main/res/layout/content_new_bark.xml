@@ -55,15 +55,16 @@
         android:id="@+id/submitBarkButton"
         android:layout_below="@+id/barkText"
         android:layout_centerHorizontal="true"
-        android:background="#52c5ff"
+        android:background="@drawable/bone"
         android:enabled="true" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
         android:text="Back"
         android:id="@+id/backButton"
+        android:background="@drawable/bone"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="15dp"

@@ -5,16 +5,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.io.File;
 import java.util.LinkedList;
 
 public class ProfileMain extends AppCompatActivity {
@@ -27,6 +31,8 @@ public class ProfileMain extends AppCompatActivity {
 
         final HandleDB helper = new HandleDB(getApplicationContext());
         final SQLiteDatabase db = helper.getReadableDatabase();
+
+        final ImageView background = (ImageView) findViewById(R.id.profileBackground);
 
         final Button viewActivities = (Button) findViewById(R.id.activityBtn);
         final TextView nameTextView = (TextView) findViewById(R.id.nameTextView);
@@ -72,6 +78,10 @@ public class ProfileMain extends AppCompatActivity {
                 } while(c.moveToNext());
             }
         }
+
+        File file = new File(Environment.getExternalStorageDirectory()+File.separator + photoPath);
+        Uri uri = Uri.fromFile(file);
+        background.setImageURI(uri);
 
         final String finalName = name;
 

@@ -148,6 +148,18 @@ public class Profile extends AppCompatActivity {
             }
         });*/
 
+        Button back = (Button)findViewById(R.id.newProfBack);
+        back.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v){
+                Intent i = new Intent(v.getContext(),MainActivity.class);
+                startActivityForResult(i,0);
+                finishActivity(1);
+                finish();
+            }
+        });
+
     }
 
 

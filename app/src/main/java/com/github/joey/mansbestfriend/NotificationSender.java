@@ -36,7 +36,6 @@ public class NotificationSender extends BroadcastReceiver {
     }
 
     static void scheduleAlarms(Context c,String name, String title, int time){
-
         AlarmManager mgr = (AlarmManager)c.getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(c,BackgroundService.class);
         Bundle b = new Bundle();
@@ -49,6 +48,7 @@ public class NotificationSender extends BroadcastReceiver {
         long tmpTime = 1000 * time;
         PendingIntent p = PendingIntent.getService(c,0,i,0);
         mgr.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), tmpTime, p);
+        Log.e("schedule","Scheduling alarm");
 
 //        PendingIntent pendInt = PendingIntent.getBroadcast(this,0,new Intent(this,NotificationSender.class),PendingIntent.FLAG_UPDATE_CURRENT);
 //        Calendar c = Calendar.getInstance();

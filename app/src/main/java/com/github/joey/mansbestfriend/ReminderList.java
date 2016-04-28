@@ -64,18 +64,18 @@ public class ReminderList extends AppCompatActivity {
             Log.e("db","title is empty");
         }
 
-        remindList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        remindList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
-            public void onItemClick(AdapterView<?> arg0, View v, int pos, long i2){
+            public void onItemClick(AdapterView<?> arg0, View v, int pos, long i2) {
 
-                Intent edit = new Intent(v.getContext(),EditReminder.class);
+                Intent edit = new Intent(v.getContext(), EditReminder.class);
                 Bundle b = new Bundle();
-                b.putInt("num",profNum);
+                b.putInt("num", profNum);
                 String title = remindList.getItemAtPosition(pos).toString();
-                b.putString("title",title);
+                b.putString("title", title);
                 edit.putExtras(b);
-                startActivityForResult(edit,0);
+                startActivityForResult(edit, 0);
                 finishActivity(1);
             }
         });
@@ -92,7 +92,7 @@ public class ReminderList extends AppCompatActivity {
             public void onClick(View v) {
                 Intent newReminder = new Intent(v.getContext(), NewReminder.class);
                 Bundle b = new Bundle();
-                b.putInt("1",profNum);
+                b.putInt("1", profNum);
                 newReminder.putExtras(b);
                 startActivityForResult(newReminder, 0);
                 finishActivity(1);
@@ -114,6 +114,21 @@ public class ReminderList extends AppCompatActivity {
                 finishActivity(1);
                 finish();
 
+            }
+        });
+
+        Button back = (Button)findViewById(R.id.remBack);
+        back.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v){
+                Intent i = new Intent(v.getContext(),ProfileMain.class);
+                Bundle b = new Bundle();
+                b.putInt("1",profNum);
+                i.putExtras(b);
+                startActivityForResult(i,0);
+                finishActivity(1);
+                finish();
             }
         });
 

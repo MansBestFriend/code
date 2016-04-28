@@ -107,6 +107,22 @@ public class ActivityList extends AppCompatActivity {
             }
         });
 
+        Button back = (Button)findViewById(R.id.activBack);
+        back.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v){
+
+                Intent i = new Intent(v.getContext(),ProfileMain.class);
+                Bundle b = new Bundle();
+                b.putInt("1",profNum);
+                i.putExtras(b);
+                startActivityForResult(i,0);
+                finishActivity(1);
+                finish();
+            }
+        });
+
     }
 
 

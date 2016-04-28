@@ -173,6 +173,21 @@ public class EditReminder extends AppCompatActivity {
             }
 
         });
+
+        Button back = (Button)findViewById(R.id.editBack);
+        back.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v){
+                Intent i = new Intent(v.getContext(),ReminderList.class);
+                Bundle b = new Bundle();
+                b.putInt("1",profNum);
+                i.putExtras(b);
+                startActivityForResult(i,0);
+                finishActivity(1);
+                finish();
+            }
+        });
     }
 
     public void setupUI(View view) {

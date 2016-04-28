@@ -157,4 +157,16 @@
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/editDay"
         android:layout_alignEnd="@+id/editDay" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:id="@+id/editBack"
+        android:layout_above="@+id/newTxt"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/minField"
+        android:layout_alignRight="@+id/oldTxt"
+        android:layout_alignEnd="@+id/oldTxt" />
 </RelativeLayout>

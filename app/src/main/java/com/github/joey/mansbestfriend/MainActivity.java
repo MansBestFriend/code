@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent barksList = new Intent(v.getContext(), BarksList.class);
-                startActivityForResult(barksList, 0);
+                startActivity(barksList);
                 finish();
             }
         });
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 Intent db = new Intent(v.getContext(), Database.class);
-                startActivityForResult(db,0);
+                startActivity(db);
                 finish();
             }
         });

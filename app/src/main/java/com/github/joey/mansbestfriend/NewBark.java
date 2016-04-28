@@ -3,10 +3,9 @@ package com.github.joey.mansbestfriend;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +14,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-
-import java.lang.reflect.Array;
 
 public class NewBark extends AppCompatActivity {
 
@@ -39,6 +36,7 @@ public class NewBark extends AppCompatActivity {
             public void onClick(View v) {
                 Intent barksList = new Intent(v.getContext(), BarksList.class);
                 startActivity(barksList);
+                finish();
             }
         });
 
@@ -48,7 +46,7 @@ public class NewBark extends AppCompatActivity {
             public void onClick(View v) {
                 Intent barksList = new Intent(v.getContext(), BarksList.class);
                 startActivity(barksList);
-
+                finish();
                 //This should also add the new bark's information to the barks table in the database
             }
         });

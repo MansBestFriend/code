@@ -1,7 +1,9 @@
 package com.github.joey.mansbestfriend;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +17,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.text.DateFormat;
+import java.util.Date;
+
 public class NewBark extends AppCompatActivity {
 
     @Override
@@ -26,6 +31,11 @@ public class NewBark extends AppCompatActivity {
         String[] barkTypeList = new String[]{"Recommendation", "Warning", "Adoption", "Funny", "Other"};
         ArrayAdapter<String> barkAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, barkTypeList);
         barkTypeDropdown.setAdapter(barkAdapter);
+        final Spinner barkType = (Spinner) findViewById(R.id.barkTypeDropdown);
+        final EditText barkText = (EditText) findViewById(R.id.barkText);
+
+        HandleDB helper = new HandleDB(getApplicationContext());
+        final SQLiteDatabase db = helper.getReadableDatabase();
 
         Button backButton = (Button) findViewById(R.id.backButton);
         Button submitBarkButton = (Button) findViewById(R.id.submitBarkButton);
@@ -44,6 +54,15 @@ public class NewBark extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+
+                ContentValues values = new ContentValues();
+                values.put("Category",barkType.getSelectedItem().toString());
+                values.put("Comment",barkText.getText().toString());
+                values.put("DateTime", DateFormat.getDateTimeInstance().format(new Date()));
+                values.put("LikeNumber",0);
+
+                db.insert("Barks",null,values);
+
                 Intent barksList = new Intent(v.getContext(), BarksList.class);
                 startActivity(barksList);
                 finish();

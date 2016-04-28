@@ -1,8 +1,10 @@
 package com.github.joey.mansbestfriend;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -22,6 +24,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.util.LinkedList;
@@ -52,6 +55,13 @@ public class ProfileMain extends AppCompatActivity {
         final Spinner editBreedDropdown = (Spinner) findViewById(R.id.editBreedDropdown);
         final Button submitButton = (Button) findViewById(R.id.submitProfileButton);
         final Button back = (Button)findViewById(R.id.mainBack);
+        final Button deleteProfileButton = (Button) findViewById(R.id.deleteProfileButton);
+        final TextView ageTitle = (TextView) findViewById(R.id.ageTitle);
+        final TextView sexTitle = (TextView) findViewById(R.id.sexTitle);
+        final TextView breedTitle = (TextView) findViewById(R.id.breedTitle);
+        final TextView areYouSure = (TextView) findViewById(R.id.areYouSureTextView);
+        final Button yesButton = (Button) findViewById(R.id.yesButton);
+        final Button cancelButton = (Button) findViewById(R.id.cancelButton);
 
         editName.setVisibility(View.INVISIBLE);
         editAge.setVisibility(View.INVISIBLE);
@@ -59,6 +69,10 @@ public class ProfileMain extends AppCompatActivity {
         editSex.setVisibility(View.INVISIBLE);
         submitButton.setVisibility(View.INVISIBLE);
         editBreedDropdown.setVisibility(View.INVISIBLE);
+        deleteProfileButton.setVisibility(View.INVISIBLE);
+        areYouSure.setVisibility(View.INVISIBLE);
+        yesButton.setVisibility(View.INVISIBLE);
+        cancelButton.setVisibility(View.INVISIBLE);
 
 
 
@@ -88,8 +102,8 @@ public class ProfileMain extends AppCompatActivity {
         }
 
         //File file = new File(photoPath);
-        Bitmap bit = CustomList.decodeSampledBitmapFromResource(this.getResources(), photoPath, 100, 100);
-        background.setImageBitmap(bit);
+        //Bitmap bit = CustomList.decodeSampledBitmapFromResource(this.getResources(), photoPath, 100, 100);
+        //background.setImageBitmap(bit);
         //background.setImageURI(uri);
         //Matrix m = new Matrix();
         //background.setScaleType(ImageView.ScaleType.MATRIX);
@@ -167,6 +181,7 @@ public class ProfileMain extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+
                 back.setVisibility(View.INVISIBLE);
                 nameTextView.setVisibility(View.INVISIBLE);
                 biographyTextView.setVisibility(View.INVISIBLE);
@@ -183,6 +198,7 @@ public class ProfileMain extends AppCompatActivity {
                 editBiography.setVisibility(View.VISIBLE);
                 editSex.setVisibility(View.VISIBLE);
                 submitButton.setVisibility(View.VISIBLE);
+                deleteProfileButton.setVisibility(View.VISIBLE);
             }
         });
 
@@ -190,6 +206,7 @@ public class ProfileMain extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+
 
                 String newName = editName.getText().toString();
                 String newBiography = editBiography.getText().toString();
@@ -226,6 +243,7 @@ public class ProfileMain extends AppCompatActivity {
                 editSex.setVisibility(View.INVISIBLE);
                 editBreedDropdown.setVisibility(View.INVISIBLE);
                 submitButton.setVisibility(View.INVISIBLE);
+                deleteProfileButton.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -234,12 +252,75 @@ public class ProfileMain extends AppCompatActivity {
 
             @Override
             public void onClick(View v){
+
+
                 Intent i = new Intent(v.getContext(),MainActivity.class);
                 startActivityForResult(i,0);
                 finishActivity(1);
                 finish();
             }
         });
+
+        deleteProfileButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                editName.setVisibility(View.INVISIBLE);
+                editAge.setVisibility(View.INVISIBLE);
+                editBiography.setVisibility(View.INVISIBLE);
+                editSex.setVisibility(View.INVISIBLE);
+                editBreedDropdown.setVisibility(View.INVISIBLE);
+                submitButton.setVisibility(View.INVISIBLE);
+                deleteProfileButton.setVisibility(View.INVISIBLE);
+                ageTitle.setVisibility(View.INVISIBLE);
+                sexTitle.setVisibility(View.INVISIBLE);
+                breedTitle.setVisibility(View.INVISIBLE);
+
+                areYouSure.setVisibility(View.VISIBLE);
+                yesButton.setVisibility(View.VISIBLE);
+                cancelButton.setVisibility(View.VISIBLE);
+            }
+        });
+
+        yesButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                db.delete("Profiles","Id=" + profNum,null);
+
+                Intent i = new Intent(v.getContext(),MainActivity.class);
+                startActivityForResult(i,0);
+                finishActivity(1);
+                finish();
+            }
+        });
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                editName.setVisibility(View.VISIBLE);
+                editAge.setVisibility(View.VISIBLE);
+                editBiography.setVisibility(View.VISIBLE);
+                editSex.setVisibility(View.VISIBLE);
+                editBreedDropdown.setVisibility(View.VISIBLE);
+                submitButton.setVisibility(View.VISIBLE);
+                deleteProfileButton.setVisibility(View.VISIBLE);
+                ageTitle.setVisibility(View.VISIBLE);
+                sexTitle.setVisibility(View.VISIBLE);
+                breedTitle.setVisibility(View.VISIBLE);
+
+                areYouSure.setVisibility(View.INVISIBLE);
+                yesButton.setVisibility(View.INVISIBLE);
+                cancelButton.setVisibility(View.INVISIBLE);
+
+            }
+        });
+
+
 
     }
 

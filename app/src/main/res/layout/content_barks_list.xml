@@ -4,10 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     android:backgroundTint="#d2e6fc"
     android:background="#e2f2fd"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -18,17 +14,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/backgroundSunset"
-        android:src="@drawable/dogsunrise"
+        android:src="@drawable/mainbg"
         android:saveEnabled="false"
         android:scaleType="centerCrop"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/imageView"
-        android:src="#910b0b0b" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -36,9 +26,10 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Your Location:"
         android:id="@+id/yourLocation"
+        android:paddingTop="16dp"
         android:layout_marginLeft="25dp"
         android:layout_marginStart="25dp"
-        android:layout_alignBottom="@+id/locationText"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:textColor="#ffff" />
@@ -49,7 +40,8 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Tuscaloosa, AL"
         android:id="@+id/locationText"
-        android:layout_alignParentBottom="true"
+        android:paddingTop="16dp"
+        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="150dp"
@@ -58,14 +50,14 @@
         android:textColor="#d6d6d6" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="140dp"
+        android:layout_height="60dp"
         android:text="New Bark"
         android:id="@+id/newBarkButton"
+        android:background="@drawable/bone"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:textSize="30dp"
-        android:textColor="#ffff"
-        android:background="#7d000000" />
+        android:textSize="20dp"
+        />
 
 </RelativeLayout>

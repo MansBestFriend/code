@@ -61,7 +61,7 @@ public class NewBark extends AppCompatActivity {
                 values.put("DateTime", DateFormat.getDateTimeInstance().format(new Date()));
                 values.put("LikeNumber",0);
 
-                //db.insert("Barks",null,values);
+                db.insert("Barks",null,values);
 
                 Intent barksList = new Intent(v.getContext(), BarksList.class);
                 startActivity(barksList);

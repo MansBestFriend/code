@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
                 Bundle b = new Bundle();
                 b.putInt("1",position + 1);
                 prof.putExtras(b);
-                startActivityForResult(prof,0);
+                startActivity(prof);
                 finishActivity(1);
                 finish();
             }

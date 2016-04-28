@@ -1,5 +1,6 @@
 package com.github.joey.mansbestfriend;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +12,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -30,7 +33,7 @@ public class ProfileMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_main);
-
+        setupUI(findViewById(R.id.profileParent));
         final HandleDB helper = new HandleDB(getApplicationContext());
         final SQLiteDatabase db = helper.getReadableDatabase();
 
@@ -48,6 +51,7 @@ public class ProfileMain extends AppCompatActivity {
         final EditText editSex = (EditText) findViewById(R.id.editSexTextField);
         final Spinner editBreedDropdown = (Spinner) findViewById(R.id.editBreedDropdown);
         final Button submitButton = (Button) findViewById(R.id.submitProfileButton);
+        final Button back = (Button)findViewById(R.id.mainBack);
 
         editName.setVisibility(View.INVISIBLE);
         editAge.setVisibility(View.INVISIBLE);
@@ -55,6 +59,8 @@ public class ProfileMain extends AppCompatActivity {
         editSex.setVisibility(View.INVISIBLE);
         submitButton.setVisibility(View.INVISIBLE);
         editBreedDropdown.setVisibility(View.INVISIBLE);
+
+
 
         Bundle b = getIntent().getExtras();
         final int profNum = b.getInt("1");
@@ -82,7 +88,7 @@ public class ProfileMain extends AppCompatActivity {
         }
 
         //File file = new File(photoPath);
-        Bitmap bit = CustomList.decodeSampledBitmapFromResource(this.getResources(),photoPath,100,100);
+        Bitmap bit = CustomList.decodeSampledBitmapFromResource(this.getResources(), photoPath, 100, 100);
         background.setImageBitmap(bit);
         //background.setImageURI(uri);
         //Matrix m = new Matrix();
@@ -132,8 +138,9 @@ public class ProfileMain extends AppCompatActivity {
                 Bundle b = new Bundle();
                 b.putInt("1", profNum);
                 activMenu.putExtras(b);
-                startActivityForResult(activMenu, 0);
+                startActivity(activMenu);
                 finishActivity(1);
+                finish();
             }
         });
 
@@ -148,8 +155,9 @@ public class ProfileMain extends AppCompatActivity {
                 Bundle b = new Bundle();
                 b.putInt("1", profNum);
                 remindMenu.putExtras(b);
-                startActivityForResult(remindMenu, 0);
+                startActivity(remindMenu);
                 finishActivity(1);
+                finish();
             }
         });
 
@@ -159,6 +167,7 @@ public class ProfileMain extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+                back.setVisibility(View.INVISIBLE);
                 nameTextView.setVisibility(View.INVISIBLE);
                 biographyTextView.setVisibility(View.INVISIBLE);
                 ageTextView.setVisibility(View.INVISIBLE);
@@ -209,6 +218,7 @@ public class ProfileMain extends AppCompatActivity {
                 viewActivities.setVisibility(View.VISIBLE);
                 viewReminders.setVisibility(View.VISIBLE);
                 editProfile.setVisibility(View.VISIBLE);
+                back.setVisibility(View.VISIBLE);
 
                 editName.setVisibility(View.INVISIBLE);
                 editAge.setVisibility(View.INVISIBLE);
@@ -219,7 +229,7 @@ public class ProfileMain extends AppCompatActivity {
             }
         });
 
-        Button back = (Button)findViewById(R.id.mainBack);
+
         back.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -231,5 +241,36 @@ public class ProfileMain extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void setupUI(View view) {
+
+        //Set up touch listener for non-text box views to hide keyboard.
+        if(!(view instanceof EditText)) {
+
+            view.setOnTouchListener(new View.OnTouchListener() {
+
+                public boolean onTouch(View v, MotionEvent event) {
+                    hideSoftKeyboard(ProfileMain.this);
+                    return false;
+                }
+            });
+        }
+
+        //If a layout container, iterate over children and seed recursion.
+        if (view instanceof ViewGroup) {
+
+            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+
+                View innerView = ((ViewGroup) view).getChildAt(i);
+
+                setupUI(innerView);
+            }
+        }
+    }
+
+    public static void hideSoftKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager = (InputMethodManager)  activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 }

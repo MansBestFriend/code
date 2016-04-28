@@ -33,13 +33,24 @@ public class BarksList extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent newBark = new Intent(v.getContext(), NewBark.class);
-                startActivityForResult(newBark, 0);
+                startActivity(newBark);
             }
         });
 
         String mLatitudeText;
         String mLongitudeText;
 
+        Button back = (Button)findViewById(R.id.barkBack);
+        back.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v){
+                Intent i = new Intent(v.getContext(),MainActivity.class);
+                startActivity(i);
+                finishActivity(1);
+                finish();
+            }
+        });
         /*
         GoogleApiClient mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this,

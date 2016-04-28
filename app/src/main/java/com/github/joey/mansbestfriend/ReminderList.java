@@ -75,7 +75,7 @@ public class ReminderList extends AppCompatActivity {
                 String title = remindList.getItemAtPosition(pos).toString();
                 b.putString("title", title);
                 edit.putExtras(b);
-                startActivityForResult(edit, 0);
+                startActivity(edit);
                 finishActivity(1);
             }
         });
@@ -94,7 +94,7 @@ public class ReminderList extends AppCompatActivity {
                 Bundle b = new Bundle();
                 b.putInt("1", profNum);
                 newReminder.putExtras(b);
-                startActivityForResult(newReminder, 0);
+                startActivity(newReminder);
                 finishActivity(1);
             }
         });
@@ -110,7 +110,7 @@ public class ReminderList extends AppCompatActivity {
                 Bundle b = new Bundle();
                 b.putInt("1",profNum);
                 refresh.putExtras(b);
-                startActivityForResult(refresh,0);
+                startActivity(refresh);
                 finishActivity(1);
                 finish();
 
@@ -126,7 +126,7 @@ public class ReminderList extends AppCompatActivity {
                 Bundle b = new Bundle();
                 b.putInt("1",profNum);
                 i.putExtras(b);
-                startActivityForResult(i,0);
+                startActivity(i);
                 finishActivity(1);
                 finish();
             }

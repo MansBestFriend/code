@@ -9,6 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:backgroundTint="#d2e6fc"
+    android:id="@+id/newActivParent"
     android:background="#e2f2fd"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.github.joey.mansbestfriend.NewActivity"
@@ -27,12 +28,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Comment"
         android:ems="10"
         android:id="@+id/activityComment"
         android:layout_below="@+id/activityDropdown"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:hint="Comment" />
 
     <Button
         android:layout_width="160dp"

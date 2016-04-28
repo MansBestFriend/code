@@ -102,7 +102,7 @@ public class ActivityList extends AppCompatActivity {
                 Bundle b = new Bundle();
                 b.putInt("1",profNum);
                 newActivity.putExtras(b);
-                startActivityForResult(newActivity, 0);
+                startActivity(newActivity);
                 finishActivity(1);
             }
         });
@@ -117,7 +117,7 @@ public class ActivityList extends AppCompatActivity {
                 Bundle b = new Bundle();
                 b.putInt("1",profNum);
                 i.putExtras(b);
-                startActivityForResult(i,0);
+                startActivity(i);
                 finishActivity(1);
                 finish();
             }

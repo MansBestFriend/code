@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent newProfile = new Intent(v.getContext(), Profile.class);
                 startActivityForResult(newProfile, 3);
-
+                finish();
 
             }
         });
@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent barksList = new Intent(v.getContext(), BarksList.class);
                 startActivityForResult(barksList, 0);
+                finish();
             }
         });
 
@@ -94,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v){
                 Intent db = new Intent(v.getContext(), Database.class);
                 startActivityForResult(db,0);
+                finish();
             }
         });
 
@@ -173,6 +175,7 @@ public class MainActivity extends AppCompatActivity {
                 prof.putExtras(b);
                 startActivityForResult(prof,0);
                 finishActivity(1);
+                finish();
             }
         });
         db.close();

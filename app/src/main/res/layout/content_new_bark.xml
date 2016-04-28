@@ -10,6 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:backgroundTint="#d2e6fc"
     android:background="#e2f2fd"
+    android:id="@+id/newBarkParent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.github.joey.mansbestfriend.NewBark"
     tools:showIn="@layout/activity_new_bark"

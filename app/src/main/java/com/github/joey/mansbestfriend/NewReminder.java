@@ -99,7 +99,7 @@ public class NewReminder extends AppCompatActivity {
                 Bundle b = new Bundle();
                 b.putInt("1", profNum);
                 remindMenu.putExtras(b);
-                startActivityForResult(remindMenu, 0);
+                startActivity(remindMenu);
                 finishActivity(1);
                 finish();
             }
@@ -114,7 +114,7 @@ public class NewReminder extends AppCompatActivity {
                 Bundle b = new Bundle();
                 b.putInt("1",profNum);
                 i.putExtras(b);
-                startActivityForResult(i,0);
+                startActivity(i);
                 finishActivity(1);
                 finish();
             }

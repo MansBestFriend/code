@@ -85,8 +85,6 @@ public class ProfileMain extends AppCompatActivity {
 
         final String finalName = name;
 
-        //test
-
         nameTextView.setText(name);
         biographyTextView.setText(biography);
         ageTextView.setText(age);

@@ -38,20 +38,22 @@ public class BackgroundService extends Service {
             Bundle b = intent.getExtras();
             if(b != null) {
                 Log.d(getClass().getSimpleName(), "I ran!");
-                String strTime = b.get("time").toString();
-                String strName = b.get("name").toString();
-                String strTitle = b.get("title").toString();
-                Intent i = new Intent(this, NotificationSender.class);
-                PendingIntent pi = PendingIntent.getActivity(this, 1, i, 0);
-                NotificationManager manager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
-                Notification.Builder build = new Notification.Builder(this);
-                build.setContentTitle(strTitle);
-                build.setContentText(strName);
-                build.setSmallIcon(R.drawable.mansbestfriendicon);
-                build.setContentIntent(pi);
-                build.setAutoCancel(true);
-                Notification notif = build.build();
-                manager.notify(1, notif);
+                if(b.get("time") != null) {
+                    String strTime = b.get("time").toString();
+                    String strName = b.get("name").toString();
+                    String strTitle = b.get("title").toString();
+                    Intent i = new Intent(this, NotificationSender.class);
+                    PendingIntent pi = PendingIntent.getActivity(this, 1, i, 0);
+                    NotificationManager manager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+                    Notification.Builder build = new Notification.Builder(this);
+                    build.setContentTitle(strTitle);
+                    build.setContentText(strName);
+                    build.setSmallIcon(R.drawable.mansbestfriendicon);
+                    build.setContentIntent(pi);
+                    build.setAutoCancel(true);
+                    Notification notif = build.build();
+                    manager.notify(1, notif);
+                }
 
             }
         }

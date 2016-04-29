@@ -102,8 +102,10 @@ public class ProfileMain extends AppCompatActivity {
         }
 
         //File file = new File(photoPath);
-        Bitmap bit = CustomList.decodeSampledBitmapFromResource(this.getResources(), photoPath, 100, 100);
-        background.setImageBitmap(bit);
+        if(profNum != 1) {
+            Bitmap bit = CustomList.decodeSampledBitmapFromResource(this.getResources(), photoPath, 100, 100);
+            background.setImageBitmap(bit);
+        }
         //background.setImageURI(uri);
         //Matrix m = new Matrix();
         //background.setScaleType(ImageView.ScaleType.MATRIX);

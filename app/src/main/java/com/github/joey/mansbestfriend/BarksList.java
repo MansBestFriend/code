@@ -92,7 +92,7 @@ public class BarksList extends AppCompatActivity {
                 ContentValues values = new ContentValues();
                 values.put("likeNumber", likeNumber2 + 1);
                 db.update("Barks", values, "ID=" + Id, null);
-                db.close();
+
                 Intent i = new Intent(getApplicationContext(),BarksList.class);
                 startActivity(i);
                 finish();
@@ -109,6 +109,7 @@ public class BarksList extends AppCompatActivity {
             public void onClick(View v) {
                 Intent newBark = new Intent(v.getContext(), NewBark.class);
                 startActivity(newBark);
+                db.close();
                 finish();
             }
         });
@@ -124,6 +125,7 @@ public class BarksList extends AppCompatActivity {
                 Intent i = new Intent(v.getContext(),MainActivity.class);
                 startActivity(i);
                 finishActivity(1);
+                db.close();
                 finish();
             }
         });
